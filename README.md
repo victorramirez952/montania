@@ -1,67 +1,106 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Montania
+## Instalación de repositorio
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### 1. Instalar Visual Studio Code
+[Visual Studio Code](https://code.visualstudio.com/download)
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 2. Instalar Xampp
+[Xampp](https://www.apachefriends.org/es/download.html)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 3. Instalar NodeJS
+[NodeJS](https://nodejs.org/en/download/current)
 
-## Learning Laravel
+### 4. Instalar Git bash
+[Git Bash](https://git-scm.com/downloads)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 5. Configurar git bash
+Abrir git bash y ejecutar los siguientes comandos
+```bash
+git config --global user.name "username_cuenta_github"
+git config --global user.email correo_cuenta_github@example.com
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+[Configurando Git por primera vez](https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Configurando-Git-por-primera-vez)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 6. Instalar Composer
+[Composer](https://getcomposer.org/download/)
 
-## Laravel Sponsors
+*Descargar el instalador para windows y ejecutarlo*
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### 7. Clonar (descargar) repositorio de github
+- Abrir el explorador de archivos
+- Ir al directorio C:\xampp\htdocs\
+- Crear una carpeta llamada "montania"
+- Ingresar dentro de la carpeta "montania"
+- Dar clic derecho en cualquier parte de la ventana del explorador de archivos
+- Seleccionar la opción "Open Git Bash here" para abrir Git bash
+- Ingresar el siguiente comando:
+```bash
+git clone https://github.com/victorramirez952/Glearning.git
+````
+- Ingresar el siguiente comando para abrir Visual Studio Code en el directorio actual:
+```bash
+code .
+```
 
-### Premium Partners
+### 8. Instalar dependencias npm
+Ejecutar el siguiente comando en Git Bash o en una terminal del Visual Studio Code abierto en el paso anterior:
+```bash
+npm install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 9. Instalar dependencias composer
+Ejecutar el siguiente comando en Git Bash o en una terminal del Visual Studio Code:
+```bash
+composer install
+```
 
-## Contributing
+### 8. Generar app key
+Ejecutar el siguiente comando en Git Bash o en una terminal del Visual Studio Code:
+```bash
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 9. Restaurar base de datos montania
+- Descargar el archivo llamado "montania.sql"
+- Abrir Xampp
+- Dar clic en Start para iniciar Apache
+- Dar clic en Start para iniciar MySQL
+- Dar clic en Admin para MySQL
+- Crear nueva base de datos llamada "montania"
+- Dar clic a la sección de "import" en el phpmyadmin
+- Seleccionar el archivo "montania.sql" y dar clic en el boton inferior "Import"
 
-## Code of Conduct
+### 10. Configurar .env para conectar a la base de datos
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+En el directorio de "montania", cambiar el nombre del archivo ".env.example" a ".env"
 
-## Security Vulnerabilities
+Editar el documento ".env" de tal forma que tenga lo siguiente (Dejar las otras opciones por defecto):
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=montania
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+*Ajustar el DB_HOST y/o el DB_PORT si es necesario*
 
-## License
+### 11. Cambiar la ruta de APP_URL
+En el archivo ".env", modificar el APP_URL con la ruta en la cual se encuentra el directorio "montania/public" dentro de htdocs. Por ejemplo:
+```
+APP_URL=http://localhost/montania/public
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# montania
+### 12. Levantar proyecto
+Ejecutar el siguiente comando en Git Bash o en una terminal del Visual Studio Code:
+```bash
+npm run dev
+```
+
+En el navegador, ir a la ruta de APP_URL
+[http://localhost/montania/public](https://youtu.be/dQw4w9WgXcQ?si=zqZeX9w1nFcJ9zYC)
+
