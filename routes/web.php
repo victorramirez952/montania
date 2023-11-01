@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
@@ -35,11 +36,12 @@ Route::get('/contact', function () {
 
 Route::resource('services', ServiceController::class);
 Route::resource('projects', ProjectController::class);
-Route::resource('clients', ClientController::class);
+Route::resource('customers', CustomerController::class);
+Route::get('customers/{customer}/resources', [CustomerController::class, 'resources'])->name('customers.resources');
 // Route::controller(ClientController::class)->group(function(){
 //     Route::get('/clients', "index")->name('clients.index');
 //     Route::get('/clients/projects', "projects")->name('clients.projects');
 //     Route::get('/clients/resources', "resources")->name('clients.resources');
 // });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

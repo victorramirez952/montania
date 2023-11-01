@@ -6,7 +6,7 @@
     <h1>Portafolio</h1>
     @foreach ($projects as $project)
         <li>
-            <a href="{{route('projects.show', $project->id)}}">{{$project->name}}</a>
+            <a href="{{route('projects.show', $project->id_project)}}">{{$project->name}}</a>
         </li>
     @endforeach
 @endsection

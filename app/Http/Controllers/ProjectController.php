@@ -10,7 +10,7 @@ class ProjectController extends Controller
     // Pagina principal
     public function index(){
         // $cursos = Curso::orderBy('id', 'desc')->paginate();
-        $projects = Project::orderBy('id', 'desc')->paginate();
+        $projects = Project::orderBy('id_project', 'asc')->paginate();
         return view('projects.index', compact('projects'));
     }
 
