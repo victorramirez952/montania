@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,23 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(HttpRequest $request)
+    {
+        $credentials = request()->only('email', 'password');
+        $this->validate($request,[
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        if(Auth::attempt($credentials)){
+            if(auth()->user()->type == 1){
+                return redirect()->route('admin.home');
+            } else {
+                return redirect('/')->with('error', 'You have no admin access');
+            }
+        } else{
+            return redirect()->route('login')->with('error', 'Input proper email/pasword');
+        }
     }
 }

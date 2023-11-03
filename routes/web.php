@@ -4,6 +4,8 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,12 +20,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+
+Auth::routes();
+
+// Route::get('/login', function () {
+//     return view('login');
+// });
 
 Route::get('/about', function () {
     return view('about');
@@ -37,6 +43,7 @@ Route::get('/contact', function () {
 Route::resource('services', ServiceController::class);
 Route::resource('projects', ProjectController::class);
 Route::resource('customers', CustomerController::class);
+Route::resource('users', UserController::class);
 Route::get('customers/{customer}/resources', [CustomerController::class, 'resources'])->name('customers.resources');
 // Route::controller(ClientController::class)->group(function(){
 //     Route::get('/clients', "index")->name('clients.index');

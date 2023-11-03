@@ -13,8 +13,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h3>Welcome to the User Dashboard</h3>
-                    {{-- {{ __('You are logged in!') }} --}}
+                    <h3>Welcome to the Admin Dashboard</h3>
+                    {{ __('You are logged in!') }}
                 </div>
                 @auth
                     <p>Welcome, {{ Auth::user() }}</p>

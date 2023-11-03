@@ -133,11 +133,11 @@ DROP TABLE IF EXISTS `customer_project`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer_project` (
-  `email` varchar(50) NOT NULL,
+  `id_customer` int(10) unsigned NOT NULL,
   `id_project` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`email`,`id_project`),
+  PRIMARY KEY (`id_customer`,`id_project`),
   KEY `id_project` (`id_project`),
-  CONSTRAINT `customer_project_ibfk_1` FOREIGN KEY (`email`) REFERENCES `customers` (`email`) ON DELETE CASCADE,
+  CONSTRAINT `customer_project_ibfk_1` FOREIGN KEY (`id_customer`) REFERENCES `customers` (`id_customer`) ON DELETE CASCADE,
   CONSTRAINT `customer_project_ibfk_2` FOREIGN KEY (`id_project`) REFERENCES `projects` (`id_project`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -148,7 +148,7 @@ CREATE TABLE `customer_project` (
 
 LOCK TABLES `customer_project` WRITE;
 /*!40000 ALTER TABLE `customer_project` DISABLE KEYS */;
-INSERT INTO `customer_project` VALUES ('alex.martinez@example.com',1),('alex.martinez@example.com',2),('ava.nguyen@example.com',3),('chris.brown@example.com',4),('emily.williams@example.com',5),('jane.smith@example.com',6),('john.doe@example.com',7),('mike.johnson@example.com',8);
+INSERT INTO `customer_project` VALUES (1,7),(2,6),(3,8),(4,5),(5,4),(7,1),(7,2),(10,3);
 /*!40000 ALTER TABLE `customer_project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,11 +161,11 @@ DROP TABLE IF EXISTS `customer_service`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer_service` (
   `id_service` int(10) unsigned NOT NULL,
-  `email` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_service`,`email`),
-  KEY `email` (`email`),
+  `id_customer` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_service`,`id_customer`),
+  KEY `id_customer` (`id_customer`),
   CONSTRAINT `customer_service_ibfk_1` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_service`) ON DELETE CASCADE,
-  CONSTRAINT `customer_service_ibfk_2` FOREIGN KEY (`email`) REFERENCES `customers` (`email`) ON DELETE CASCADE
+  CONSTRAINT `customer_service_ibfk_2` FOREIGN KEY (`id_customer`) REFERENCES `customers` (`id_customer`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -175,7 +175,7 @@ CREATE TABLE `customer_service` (
 
 LOCK TABLES `customer_service` WRITE;
 /*!40000 ALTER TABLE `customer_service` DISABLE KEYS */;
-INSERT INTO `customer_service` VALUES (1,'alex.martinez@example.com'),(2,'ava.nguyen@example.com'),(3,'chris.brown@example.com'),(4,'emily.williams@example.com'),(5,'jane.smith@example.com'),(6,'john.doe@example.com'),(7,'mike.johnson@example.com');
+INSERT INTO `customer_service` VALUES (1,7),(2,10),(3,5),(4,4),(5,2),(6,1),(7,3);
 /*!40000 ALTER TABLE `customer_service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,16 +187,15 @@ DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers` (
-  `email` varchar(50) NOT NULL,
-  `first_names` varchar(50) NOT NULL,
-  `last_names` varchar(50) NOT NULL,
-  `address` varchar(250) NOT NULL,
+  `id_customer` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `phone` varchar(15) NOT NULL,
+  `address` varchar(250) NOT NULL,
   `second_email` varchar(50) DEFAULT NULL,
-  `avatar_image` blob DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_user` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id_customer`),
+  UNIQUE KEY `id_user` (`id_user`),
+  CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +204,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES ('alex.martinez@example.com','Alex','Martinez','222 Spruce St, Borough','6667778888','secondemail7@example.com',NULL,'password7'),('ava.nguyen@example.com','Ava','Nguyen','444 Ash St, Municipality','5556667777','john.doe@example.com',NULL,'password10'),('chris.brown@example.com','Chris','Brown','555 Cedar St, County','7778889999','secondemail5@example.com',NULL,'password5'),('emily.williams@example.com','Emily','Williams','321 Pine St, Hamlet','4445556666',NULL,NULL,'password4'),('jane.smith@example.com','Jane','Smith','456 Elm St, Town','9876543210',NULL,NULL,'password2'),('john.doe@example.com','John','Doe','123 Main St, City','1234567890','jane.smith@example.com',NULL,'password1'),('mike.johnson@example.com','Mike','Johnson','789 Oak St, Village','1112223333','secondemail3@example.com',NULL,'password3'),('olivia.lee@example.com','Olivia','Lee','777 Walnut St, Township','9990001111','secondemail8@example.com',NULL,'password8'),('sarah.garcia@example.com','Sarah','Garcia','999 Birch St, District','3334445555',NULL,NULL,'password6'),('william.lopez@example.com','William','Lopez','888 Maple St, Parish','2223334444',NULL,NULL,'password9');
+INSERT INTO `customers` VALUES (1,'1234567890','123 Main St, City','jane.smith@example.com',1),(2,'9876543210','456 Elm St, Town',NULL,2),(3,'1112223333','789 Oak St, Village','secondemail3@example.com',3),(4,'4445556666','321 Pine St, Hamlet',NULL,4),(5,'7778889999','555 Cedar St, County','secondemail5@example.com',5),(6,'3334445555','999 Birch St, District',NULL,6),(7,'6667778888','222 Spruce St, Borough','secondemail7@example.com',7),(8,'9990001111','777 Walnut St, Township','secondemail8@example.com',8),(9,'2223334444','888 Maple St, Parish',NULL,9),(10,'5556667777','444 Ash St, Municipality','john.doe@example.com',10);
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,6 +539,36 @@ LOCK TABLES `stages` WRITE;
 INSERT INTO `stages` VALUES (1,1,'2023-01-15','Description for Stage 1',1),(2,2,'2023-02-20','Description for Stage 2',0),(3,3,'2023-03-10','Description for Stage 3',1),(4,4,'2023-04-05','Description for Stage 4',0),(5,5,'2023-05-15','Description for Stage 5',1),(6,6,'2023-06-20','Description for Stage 6',0),(7,7,'2023-07-10','Description for Stage 7',1),(8,8,'2023-08-05','Description for Stage 8',0),(9,9,'2023-09-15','Description for Stage 9',1),(10,10,'2023-10-20','Description for Stage 10',0),(11,1,'2023-11-10','Description for Stage 11',1),(12,2,'2023-12-05','Description for Stage 12',0),(13,3,'2024-01-15','Description for Stage 13',1);
 /*!40000 ALTER TABLE `stages` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id_user` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) DEFAULT NULL,
+  `first_names` varchar(50) NOT NULL,
+  `last_names` varchar(50) NOT NULL,
+  `avatar_image` blob DEFAULT NULL,
+  `type` int(10) unsigned DEFAULT 0,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_user`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'john.doe@example.com','John','Doe',NULL,0,'$2y$10$g5xMw6oO4eRxcnqTZDur6Opz1BRSK8aghgrNwbqtLuU9UZa5Z116O'),(2,'jane.smith@example.com','Jane','Smith',NULL,0,'$2y$10$.xlwzPpSvIECUxpL27TYteFac9aqbGhBMgPORAgJasTdhUPtrcvS.'),(3,'mike.johnson@example.com','Mike','Johnson',NULL,0,'$2y$10$Dw/J5ZXHJYN5P4MQDPeDRuJPinikK63RSH.vQbzT27BCRBPBj0kQS'),(4,'emily.williams@example.com','Emily','Williams',NULL,0,'$2y$10$X5daQEolb95WnX9ZANOovuCG6WG0YjD275bZzeQOQcxYsGsjlsZze'),(5,'chris.brown@example.com','Chris','Brown',NULL,0,'$2y$10$snRJ1d/CDKL6ZlO.k/CeqOxC8lTanVK0p0uxcuM8BtVZFAZ70GHKW'),(6,'sarah.garcia@example.com','Sarah','Garcia',NULL,0,'$2y$10$NyeRYf8ecmy7JB5w/i.BCucpM6s4pq8smCKcyHF3NW6EsmOTD3P/e'),(7,'alex.martinez@example.com','Alex','Martinez',NULL,0,'$2y$10$4rjOf4Al1K4SFPXB5srblu/dZunDQZmkhZZ0PjFGJrwvb5G11g2fm'),(8,'olivia.lee@example.com','Olivia','Lee',NULL,0,'$2y$10$8AGBZ1jA.TUSqwwycARKbO/OqFjCv5DkXGr0jIq4yGrVwqW1IKbsm'),(9,'william.lopez@example.com','William','Lopez',NULL,0,'$2y$10$40krEzP3FHHlEyzTsUfU9ePK85zI5cQFt7ZyqzTM8oOKs/HBqlxTq'),(10,'ava.nguyen@example.com','Ava','Nguyen',NULL,0,'$2y$10$G4JJDw9QuWEnLMGLbD/vaO/BTrFJM6Bk2AipM/PcgcyfwEeDbZsja'),(11,'admin1@example.com','Michael','Anderson',NULL,1,'$2y$10$ouUdrcwtevHyLSzCAskNUelVp3qSsjgev4oJn/iAsFyAZbUuunyJ2'),(12,'admin2@example.com','David','Wilson',NULL,1,'$2y$10$j8WXrZ5bHmcR/beRROBJKuwDne3ebSAUh1QAQu0IM2RGy8h4nj0zS'),(13,'admin3@example.com','Jennifer','Gonzalez',NULL,1,'$2y$10$tkNoR7CX.fJz72oLpI.b6.4r/1br6BR/C6tBkM1WfSOvjA65NEBQu'),(14,'admin4@example.com','Christopher','Taylor',NULL,1,'$2y$10$oqNauurphEv9bYXmg6eKN.OkXvz7S1vmJWQg8MbLYEizgLG8VDRYa');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -550,4 +579,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-31 17:07:58
+-- Dump completed on 2023-11-02 23:20:07

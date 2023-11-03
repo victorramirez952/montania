@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -10,7 +11,8 @@ class CustomerController extends Controller
     // Pagina principal
     public function index(){
         // $cursos = Curso::orderBy('id', 'desc')->paginate();
-        $customers = Customer::orderBy('email', 'asc')->paginate();
+        // $customers = User::orderBy('id_user', 'asc')->paginate();
+        $customers = Customer::with('user')->get();
         return view('customers.index', compact('customers'));
     }
 
