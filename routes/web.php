@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('publicHome');
 
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
@@ -42,8 +42,8 @@ Route::get('/contact', function () {
 
 Route::resource('services', ServiceController::class);
 Route::resource('projects', ProjectController::class);
-Route::resource('customers', CustomerController::class);
-Route::resource('users', UserController::class);
+Route::resource('customers', CustomerController::class)->names('customers');
+Route::resource('users', UserController::class)->names('users')->middleware('is_admin');;
 Route::get('customers/{customer}/resources', [CustomerController::class, 'resources'])->name('customers.resources');
 // Route::controller(ClientController::class)->group(function(){
 //     Route::get('/clients', "index")->name('clients.index');

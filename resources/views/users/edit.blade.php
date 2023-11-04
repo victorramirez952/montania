@@ -95,7 +95,7 @@
                             <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('Admin') }}</label>
                         
                             <div class="col-md-6">
-                                <input id="type" type="checkbox" {{ $user->type ? 'checked' : '' }} class="form-check-input @error('type') is-invalid @enderror" name="type" value="{{ $user->type ? '1' : '0' }}" autocomplete="type">
+                                <input id="type" type="checkbox" {{ $user->type == 1 ? 'checked' : '' }} class="form-check-input @error('type') is-invalid @enderror" name="type" value="1" autocomplete="type">
                                 {{-- <label for="type" class="form-check-label">{{ __('Admin') }}</label> --}}
                         
                                 @error('type')

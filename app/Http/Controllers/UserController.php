@@ -33,10 +33,11 @@ class UserController extends Controller
             'type' => 'nullable|boolean',
         ]);
         // Update properties except password
+        $checked = $request->has('type') ? true : false;
         $data = $request->except(['editPassword','password', 'type']);
 
         // Update 'type' attribute based on checkbox
-        $data['type'] = $request->has('type') ? 1 : 0;
+        $data['type'] = $checked ? 1 : 0;
 
         // Update properties except password
         $user->update($data);
@@ -46,6 +47,13 @@ class UserController extends Controller
         if ($editPassword && $request->filled('password')) {
             $user->password = Hash::make($request->password);
             $user->save();
+        }
+
+        // Assign 'Admin' role if 'type' is true
+        if ($checked) {
+            $user->assignRole('Admin');
+        } else {
+            $user->removeRole('Admin');
         }
 
         return redirect()->route('users.index', $user);

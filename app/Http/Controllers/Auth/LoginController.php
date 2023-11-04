@@ -52,7 +52,7 @@ class LoginController extends Controller
             if(auth()->user()->type == 1){
                 return redirect()->route('admin.home');
             } else {
-                return redirect('/')->with('error', 'You have no admin access');
+                return redirect('/');
             }
         } else{
             return redirect()->route('login')->with('error', 'Input proper email/pasword');
