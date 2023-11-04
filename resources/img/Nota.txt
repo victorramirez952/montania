@@ -1,0 +1,2 @@
+Directorio para colocar images importadas desde archivos .css
+Es necesario hacer un npm run build

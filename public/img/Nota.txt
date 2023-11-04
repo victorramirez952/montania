@@ -1,0 +1,1 @@
+Directorio para colocar images importadas desde archivos .blade.php

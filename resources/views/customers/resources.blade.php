@@ -1,4 +1,4 @@
-@extends('layouts.plantilla')
+@extends('layouts.app')
 
 @section('title', 'Cliente recursos ' . $customer->id_customer)
 

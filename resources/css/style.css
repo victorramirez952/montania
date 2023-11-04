@@ -1,0 +1,604 @@
+.navbar.shrink {
+  padding: 10px 0;
+  background-color: #f8f9fa;
+  transition: padding 0.3s, background-color 0.3s;
+}
+
+/* CSS del login */
+.containerLogin {
+  border: 1px solid transparent;
+  background-image: url('../img/hoja-violeta.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* CSS del footer */
+.custom-bg {
+  background-image: url('../img/hermoso-concepto-planta-verde-macro.jpg');
+  /* Reemplaza 'ruta/a/tu/imagen.jpg' con la ruta de tu imagen de fondo */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* CSS del titulo */
+.title-bg {
+  background-image: url('../img/pexels-nothing-ahead-4884760_oscuro.jpg');
+  /* Reemplaza 'ruta/a/tu/imagen.jpg' con la ruta de tu imagen de fondo */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.title {
+  align-items: center;
+  margin-top: 56px;
+  color: #EBE5D3;
+  padding: 20px;
+}
+
+/* CSS del whatssapp */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #91AA86;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  border: none;
+}
+
+.whatsapp-btn:hover {
+  color: white;
+}
+
+.whatsapp-btn img {
+  width: 25px;
+}
+
+
+/* CSS de contactanos */
+.contact-form button {
+  width: 30%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #91AA86;
+  color: #EBE5D3;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+.contact-form button:hover {
+  background-color: #223326;
+}
+
+
+
+/* CSS del log in */
+.log-bg {
+  background-image: url('../img/hoja-rosa.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.cont {
+  display: flex;
+  align-items: stretch; /* This makes the items stretch to fill the container vertically */
+  width: 55%;
+  margin: auto;
+  margin-top: 250px;
+  margin-bottom: 250px;
+}
+
+.left-side {
+  width: 60%;
+  padding: 20px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  display: flex;
+  flex-direction: column; /* To ensure image occupies its own space */
+}
+
+.left-side img {
+  width: 100%;
+  /* flex: 1; To let the image take up remaining space */
+}
+
+.right-side {
+  width: 40%;
+  padding: 30px;
+  background-color: #B14D65;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input {
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #EBE5D3;
+  border: none;
+}
+
+.login-form button {
+  width: 50%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #52213B;
+  color: #EBE5D3;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+/* CSS del mensaje enviado */
+.continue {
+  width: 100px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #91AA86;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+.continue:hover {
+  background-color: #223326;
+}
+
+/* Mods Adriana 02/11/2023 */
+/* Estilos para el banner */
+.banner {
+  background-image: url('../img/bannerFondo.svg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  position: relative;
+  filter: contrast(150%);
+}
+
+/* Estilos para el logotipo */
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 600px;
+}
+
+/* CSS del nav de Portafolio */
+.navegador-dos-columnas {
+  display: flex;
+  justify-content: space-around;
+  background-color: #91AA86;
+  color: white;
+}
+
+.navegador-w {
+  width: 70%;
+  padding: 10px 0;
+}
+
+.navegador-dos-columnas a {
+  color: white;
+  text-decoration: none;
+}
+
+
+/* CSS de las imagenes del Portafolio */
+.imagen {
+  width: 100%;
+  height: auto;
+}
+
+.columna {
+  margin-bottom: 20px;
+}
+
+.ver-mas {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.ver-mas button {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #91AA86;
+  color: #EBE5D3;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin: 0 auto;
+
+}
+
+.ver-mas button:hover {
+  background-color: #223326;
+}
+
+/* Mods Adriana 03/11/2023 */
+/* Estilos iniciales de la sección "¿Quiénes somos?" */
+.aboutContent {
+  text-align: center;
+  max-height: 500px;
+  display: flex;
+  background-color: #EBE5D3;
+}
+
+.aboutImage {
+  width: 40%;
+  margin-left: 10%;
+  padding: 20px;
+  align-self: center;
+}
+
+.aboutImage>img {
+  width: 100%;
+  max-height: 500px;
+  margin: 5%;
+}
+
+.aboutText {
+  display: block;
+  width: 40%;
+  margin-right: 10%;
+  padding: 40px;
+  height: 80%;
+  align-self: center;
+}
+
+.aboutText>p {
+  font-size: 16px;
+  text-align: justify;
+}
+
+.aboutText>h1 {
+  font-size: 36px;
+}
+
+/* CSS para el botón de más de "¿Quienes somos?" */
+.aboutUs {
+  width: 130px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #91AA86;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+.aboutUs:hover {
+  background-color: #223326;
+}
+
+/* CSS para el apartado "Proceso General Montania" */
+.genProcess {
+  background-image: url('../img/fondo-madera-natural.svg');
+  background-size: cover;
+  background-position: center;
+  max-height: 600px;
+  display: block;
+  text-align: center;
+  padding: 30px;
+}
+
+.genProcess>h1 {
+  font-size: 36px;
+}
+
+.visualProcess {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: auto;
+  gap: 20px;
+  padding: 20px;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  place-items: center;
+}
+
+.visualProcess>img {
+  height: 50px;
+  width: auto;
+}
+
+/* Estilo para el circulo con número */
+.circulo {
+  width: 50px;
+  height: 50px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+  /* Forma circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-size: 22px;
+}
+
+/* CSS para el botón de más de "Proceso General Montania" */
+.contactGenProcess {
+  width: 130px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #91AA86;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+.contactGenProcess:hover {
+  background-color: #223326;
+}
+
+/* CSS para el apartado "¿Qué hacemos?" */
+.whatWeDoText {
+  display: block;
+  width: 40%;
+  margin-left: 10%;
+  padding: 40px;
+  height: 80%;
+  align-self: center;
+}
+
+.whatWeDoText>p {
+  font-size: 16px;
+  text-align: justify;
+}
+
+.whatWeDoText>h1 {
+  font-size: 36px;
+}
+
+.whatWeDoImage {
+  width: 40%;
+  margin-right: 10%;
+  padding: 20px;
+  align-self: center;
+}
+
+.whatWeDoImage>img {
+  width: 100%;
+  max-height: 500px;
+  margin: 5%;
+}
+
+.mainServices {
+  display: block;
+  text-align: center;
+  background-image: url('../img/fondo-madera-natural.svg');
+  background-size: cover;
+  background-position: center;
+  max-height: 600px;
+  padding: 30px;
+}
+
+.mainServices>h1 {
+  font-size: 36px;
+}
+
+.viewMainServices {
+  display: flex;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 30px;
+}
+
+.serviceSpace {
+  display: block;
+  width: 40%;
+  background-color: #D9D9D9;
+  padding: 20px;
+  border-radius: 10px;
+  max-height: 450px;
+}
+
+.serviceSpace>div {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 10px;
+}
+
+.serviceSpace>div>img {
+  width: 100%;
+  height: auto;
+}
+
+/* CSS para el botón de más de "Principales Servicios" */
+.solicitarServicio {
+  width: 90%;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #91AA86;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin: 0 auto;
+}
+
+.solicitarServicio:hover {
+  background-color: #223326;
+}
+
+/* Estilos para la sección "Nuestros proyectos" */
+.ourProyects {
+  background-color: #EBE5D3;
+  max-height: 600px;
+  text-align: center;
+  padding: 40px;
+}
+
+.ourProyects>h1 {
+  font-size: 36px;
+}
+
+.smallProyectCatalogue {
+  display: flex;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.smallProyectCatalogue>img {
+  width: 19%;
+  height: auto;
+  margin: 0.5%;
+}
+
+/* Estilo para la sección "Lo que opinan nuestros clientes" */
+.someReviews {
+  background-image: url('../img/fondo-madera-natural.svg');
+  background-size: cover;
+  background-position: center;
+  display: block;
+  padding: 30px;
+  max-height: 600px;
+}
+
+.someReviews>h1 {
+  font-size: 36px;
+  text-align: center;
+}
+
+.viewReviews {
+  display: flex;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: auto;
+}
+
+.clientReview {
+  width: 30%;
+  margin: 2%;
+  background-color: #D9D9D9;
+  box-shadow: -1px 3px 1px 0 rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  height: 350px;
+}
+
+.clientReview>div {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  font-weight: bold;
+}
+
+.clientReview>div>img {
+  width: 50px;
+  height: 50px;
+  margin-right: 7px;
+}
+
+/* PAGINA SERVICIOS */
+/* CSS para el menú de servicios */
+.servicesMenu {
+  background-color: #EBE5D3;
+  text-align: center;
+  padding: 20px;
+  max-height: 500px;
+}
+
+.servicesView {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.servicesView>div {
+  width: 20%;
+  align-items: center;
+}
+
+.servicesView>div>img {
+  height: 80px;
+  width: auto;
+  margin-bottom: 20px;
+}
+
+/* Estilo para la sección "Proveedores" */
+.ourSuppliers {
+  background-color: #EBE5D3;
+  text-align: center;
+  padding: 40px;
+  max-height: 600px;
+}
+
+.viewSuppliers {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.viewSuppliers>div {
+  width: 25%;
+  align-items: center;
+}
+
+.viewSuppliers>div>img {
+  height: 80px;
+  width: auto;
+  margin-bottom: 20px;
+}
+
+/* Estilo para el botón de "solicitar" */
+.requestSupplier {
+  width: 100px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #91AA86;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.requestSupplier:hover {
+  background-color: #223326;
+}
+
+/* Estilo para la sección "Te gustaría ser proveedor?" */
+.fondoProv{
+  background-color: #EBE5D3;
+  height: 300px;
+}
+
+.fondoProv>div{
+  height: 200px;
+  align-self: center;
+  text-align: center;
+  background-image: url('../img/fondo-madera-natural.svg');
+}
