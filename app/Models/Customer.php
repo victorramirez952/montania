@@ -27,4 +27,12 @@ class Customer extends Model
     public function user() {
         return $this->hasOne('App\Models\User', 'id_user', 'id_user');
     }
+
+    public function services(){
+        return $this->belongsToMany('App\Models\Service', 'customer_service', 'id_customer', 'id_service');
+    }
+
+    public function projects(){
+        return $this->belongsToMany('App\Models\Project', 'customer_project', 'id_customer', 'id_project');
+    }
 }

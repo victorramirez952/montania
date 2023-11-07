@@ -20,7 +20,7 @@ class ServiceController extends Controller
     }
 
     // Mostrar un curso en particular
-    public function show(Service $service){
+    public function show(string $service){
         return view('services.show', compact('service'));
     }
 }

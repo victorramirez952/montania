@@ -5,8 +5,7 @@
 }
 
 /* CSS del login */
-.containerLogin {
-  border: 1px solid transparent;
+.bg-body {
   background-image: url('../img/hoja-violeta.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -89,30 +88,32 @@
 
 .cont {
   display: flex;
-  align-items: stretch; /* This makes the items stretch to fill the container vertically */
+  align-items: center;
   width: 55%;
+  height: 70%;
   margin: auto;
   margin-top: 250px;
   margin-bottom: 250px;
+
 }
 
 .left-side {
   width: 60%;
+  height: 430px;
   padding: 20px;
   padding-top: 70px;
   padding-bottom: 70px;
-  display: flex;
-  flex-direction: column; /* To ensure image occupies its own space */
+  font-size: 50px;
 }
 
 .left-side img {
   width: 100%;
-  /* flex: 1; To let the image take up remaining space */
 }
 
 .right-side {
   width: 40%;
   padding: 30px;
+  height: 430px;
   background-color: #B14D65;
 }
 
@@ -140,6 +141,26 @@
   cursor: pointer;
   border-radius: 25px;
   margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .cont {
+    flex-direction: column;
+    /* Cambia la dirección de la fila a columna */
+    margin-top: 100px;
+    margin-bottom: 40px;
+    width: 80%;
+  }
+
+  .left-side {
+    width: 100%;
+    font-size: 35px;
+    height: 300px;
+  }
+
+  .right-side {
+    width: 100%;
+  }
 }
 
 /* CSS del mensaje enviado */
@@ -230,7 +251,7 @@
   background-color: #223326;
 }
 
-/* Mods Adriana 03/11/2023 */
+/* ESTILO PARA LA PÁGINA HOME */
 /* Estilos iniciales de la sección "¿Quiénes somos?" */
 .aboutContent {
   text-align: center;
@@ -385,7 +406,6 @@
 }
 
 .mainServices {
-  display: block;
   text-align: center;
   background-image: url('../img/fondo-madera-natural.svg');
   background-size: cover;
@@ -412,7 +432,7 @@
   background-color: #D9D9D9;
   padding: 20px;
   border-radius: 10px;
-  max-height: 450px;
+  height: auto;
 }
 
 .serviceSpace>div {
@@ -539,6 +559,15 @@
   align-items: center;
 }
 
+.servicesView>div>p>a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.servicesView>div>p>a:hover {
+  text-decoration: underline;
+}
+
 .servicesView>div>img {
   height: 80px;
   width: auto;
@@ -591,14 +620,162 @@
 }
 
 /* Estilo para la sección "Te gustaría ser proveedor?" */
-.fondoProv{
+.becomeSupplier {
   background-color: #EBE5D3;
   height: 300px;
+  width: 100%;
+  padding-top: 75px;
 }
 
-.fondoProv>div{
-  height: 200px;
-  align-self: center;
-  text-align: center;
+.bgBcSupplier {
   background-image: url('../img/fondo-madera-natural.svg');
+  background-size: cover;
+  background-position: center;
+  height: 150px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ESTILO PARA PÁGINA DE UN SERVICIO ESPECIFICO */
+/* Estilo para la sección de "Detalles" */
+.serviceDetails {
+  display: flex;
+  height: auto;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 15px;
+}
+
+.detailsContent {
+  width: 50%;
+  padding: 10px;
+}
+
+.detailsContent > img {
+  max-height: 320px;
+  width: auto;
+}
+
+.detail {
+  display: block;
+  width: 90%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.detail>div {
+  display: flex;
+  border-radius: 10px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.detail>div>img {
+  height: 30px;
+  width: 30px;
+}
+
+.detail>div>p {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.detailsButtons {
+  width: 35%;
+  margin-left: 55%;
+  margin-right: 10%;
+  height: auto;
+  display: flex;
+}
+
+.contactService {
+  width: 200px;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #91AA86;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.contactService:hover {
+  background-color: #223326;
+}
+
+/* Estilo para la sección "¿Qué incluye?" */
+table {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  /* Asegura que los elementos internos respeten los bordes redondeados */
+  font-size: 16px;
+}
+
+th,
+td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: justify;
+  width: 33%;
+  vertical-align: top;
+}
+
+.lista {
+  list-style: decimal inside;
+  padding-left: 20px;
+}
+
+/* Estilo para la sección "Reviews" */
+.espServiceReviews {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.reviewEspService {
+  width: 30%;
+  padding: 10px;
+  margin: 2%;
+  text-align: justify;
+}
+
+.reviewEspService>div {
+  width: 100%;
+  display: flex;
+  font-weight: bold;
+}
+
+.reviewEspService>div>img {
+  width: 50px;
+  height: 50px;
+  margin-right: 7px;
+}
+
+/* Estilo para sección "Colaboradores" */
+.secCollabs {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  max-height: 600px;
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+
+.carruselCollabs {
+  display: flex;
+}
+
+.carrousel-item img {
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  overflow: hidden;
 }
