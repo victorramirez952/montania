@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class CustomerController extends Controller
 
     // Mostrar un curso en particular
     public function resources(Customer $customer){
-        return view('customers.resources', compact('customer'));
+        $projects = $customer->projects()->get();
+        return view('customers.resources', compact('customer', 'projects'));
     }
 }

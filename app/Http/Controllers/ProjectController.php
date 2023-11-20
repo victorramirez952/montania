@@ -10,12 +10,13 @@ class ProjectController extends Controller
     // Pagina principal
     public function index(){
         // $cursos = Curso::orderBy('id', 'desc')->paginate();
-        $projects = Project::orderBy('id_project', 'asc')->paginate();
+        $projects = Project::orderBy('id_project', 'asc');
         return view('projects.index', compact('projects'));
     }
 
     // Mostrar un curso en particular
     public function show(Project $project){
-        return view('projects.show', compact('project'));
+        $reviews = $project->reviews()->get();
+        return view('projects.show', compact('project', 'reviews'));
     }
 }

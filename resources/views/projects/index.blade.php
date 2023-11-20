@@ -18,16 +18,15 @@
         </div>
     </div>
     <div class="container mt-5">
-        @for ($i = 0; $i < count($projects); $i += 3)
-        <div class="row">
-            @for ($j = $i; $j < $i + 3 && $j < count($projects); $j++)
-            <!-- Primera columna -->
-            <div class="col-md-4">
-                <img src="{{ asset('img/cocina_1_cedro_montania.jpg') }}" alt="Imagen {{ $j + 1 }}" class="imagen columna">
+        @foreach (array_chunk($projects->get()->all(), 3) as $projectChunk)
+            <div class="row">
+                @foreach ($projectChunk as $project)
+                    <div class="col-md-4" onclick="window.location.href = '{{ route('projects.show', $project) }}'" style="cursor: pointer">
+                        <img src="{{ asset('img/cocina_1_cedro_montania.jpg') }}" alt="Imagen {{ $loop->iteration }}" class="imagen columna">
+                    </div>
+                @endforeach
             </div>
-            @endfor
-        </div>
-        @endfor
+        @endforeach
         <!-- Opción de ver más imágenes -->
         <div class="ver-mas columna">
             <button class="btn btn-primary">Ver Más Imágenes</button>

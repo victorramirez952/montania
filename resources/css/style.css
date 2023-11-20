@@ -542,7 +542,7 @@
   background-color: #EBE5D3;
   text-align: center;
   padding: 20px;
-  max-height: 500px;
+  /* max-height: 500px; */
 }
 
 .servicesView {
@@ -579,7 +579,7 @@
   background-color: #EBE5D3;
   text-align: center;
   padding: 40px;
-  max-height: 600px;
+  /* max-height: 600px; */
 }
 
 .viewSuppliers {
@@ -778,4 +778,39 @@ td {
   object-position: center;
   height: 100%;
   overflow: hidden;
+}
+
+.conta{
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.project {
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.project img {
+  max-width: 100%;
+  height: auto;
+}
+
+.project-title {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }

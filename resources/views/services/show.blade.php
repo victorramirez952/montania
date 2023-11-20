@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Servicios ' . $service)
+@section('title', 'Servicios ' . $service->name)
 
 @section('content')
     <x-Navbar/>
     <!-- Header Servicio "Design Coaching" -->
     <header class="title-bg title">
-        <p class="text-center" style="font-size: 45px;">{{$service}}</p>
+        <p class="text-center" style="font-size: 45px;">{{ $service->name }}</p>
     </header>
 
     <!-- Sección "Detalles" -->
@@ -18,50 +18,43 @@
           <p>Duration:</p>
         </div>
         <div style="border: 1px solid #223326; margin-left: 40px;">
-          <p>60 minutes</p>
+          <p>{{ $service->duration }} {{ $service->time_units }}</p>
         </div>
       </div>
       <div class="detail">
         <div>
-          <img src="{{ asset('img/icono-numero-sesiones.png') }}">
+          <img src="../img/icono-numero-sesiones.png">
           <p>Sessions:</p>
         </div>
         <div style="border: 1px solid #223326; margin-left: 40px;">
-          <p>2 sessions</p>
+          <p>{{ $service->sessions_number }} sessions</p>
         </div>
       </div>
-      <div class="detail">
-        <div>
-          <img src="{{ asset('img/icono-costo.png') }}">
-          <p>Price per area (living room, dining romm, bedroom):</p>
+      @foreach ($service->prices as $price)
+        <div class="detail">
+          <div>
+            <img src="{{ asset('img/icono-costo.png') }}">
+            <p>{{ $price->description }}:</p>
+          </div>
+          <div style="border: 1px solid #223326; margin-left: 40px;">
+            <p>${{ $price->price }}</p>
+          </div>
         </div>
-        <div style="border: 1px solid #223326; margin-left: 40px;">
-          <p>$2,990</p>
-        </div>
-      </div>
-      <div class="detail">
-        <div>
-          <img src="{{ asset('img/icono-costo.png') }}">
-          <p>Kitchen price:</p>
-        </div>
-        <div style="border: 1px solid #223326; margin-left: 40px;">
-          <p>$4,490</p>
-        </div>
-      </div>
-    </div>
+      @endforeach
+  </div>
     <div class="detailsContent">
-      <img src="{{ asset('img/patio-con-piscina.png') }}">
+      <img src="../img/patio-con-piscina.png">
     </div>
   </div>
   <div class="detailsButtons">
     <a href="https://calendly.com/montania-mx"><button type="submit" class="contactService">Schedule appointment</button></a>
-    <a href="contact.html"><button type="submit" class="contactService">Contact us</button></a>
+    <a href="{{ route('contact') }}"><button type="submit" class="contactService">Contact us</button></a>
   </div>
 
   <br>
   <br>
-  <!-- Sección "¿Qué incluye?" -->
   <div class="servicesMenu">
+    <!-- Sección "¿Qué incluye?" -->
     <h1 style="font-size: 36px; margin-bottom: 40px; margin-top: 10px;">What does it include?</h1>
     <table>
       <tr>
@@ -106,7 +99,7 @@
     </table>
   </div>
 
-  <br>
+  {{-- <br>
   <br>
   <!-- Sección de "Reviews" -->
   <div class="someReviews">
@@ -146,7 +139,7 @@
           build calm anger grave fate noon else after tonight interest outline quality maybe harvest</p>
       </div>
     </div>
-  </div>
+  </div> --}}
 
   <br>
   <br>
@@ -229,6 +222,6 @@
   </div>
 
   <x-WhatsAppButton/>
-
+  <x-Footer/>
 
 @endsection

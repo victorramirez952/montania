@@ -52,7 +52,7 @@
                 excellence and innovative vision drive us to push the boundaries of design, always seeking perfection in
                 every
                 detail.</p>
-            <button type="submit" class="aboutUs">About us</button>
+            <button type="button" onclick="window.location.href = '{{ route('about') }}'" class="aboutUs">About us</button>
         </div>
     </section>
 
