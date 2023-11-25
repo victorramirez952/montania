@@ -3,43 +3,17 @@
 @section('title', 'Servicios')
 
 @section('content')
+    <x-ModalService :service="$service ?? null"/>
     <x-Navbar/>
     <!-- Header Servicios -->
     <header class="title-bg title">
         <p class="text-center" style="font-size: 45px;">Services</p>
     </header>
-
-    {{-- @php
-$services = [
-    [
-        'src' => 'img/icono-design-visit.png',
-        'title' => 'Design visit',
-        'subtitle' => 'Starting at $1,500'
-    ],
-    [
-        'src' => 'img/icono-design-coaching.png',
-        'title' => 'Design coaching',
-        'subtitle' => 'Starting at $2,990'
-    ],
-    [
-        'src' => 'img/icono-design-project.png',
-        'title' => 'Design project',
-        'subtitle' => 'Starting at $150 x M2'
-    ],
-    [
-        'src' => 'img/icono-personal-shopper.png',
-        'title' => 'Personal Shopper',
-        'subtitle' => 'Starting at $2,350'
-    ],
-    [
-        'src' => 'img/icono-real-state-consulting.png',
-        'title' => 'Real State Consulting',
-        'subtitle' => 'Starting at $750'
-    ]
-]; --}}
-{{-- @endphp --}}
     <!-- Menu de Servicios -->
     <div class="servicesMenu w-100">
+        <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalService">
+            <i class="fa-solid fa-plus text-white"></i> Add service
+        </button>
         <div class="servicesView w-100">
             <div class="row w-100">
                 @foreach ($services as $service)
@@ -53,26 +27,6 @@ $services = [
     
   <br>
   <br>
-  {{-- @php
-$suppliers = [
-    [
-        'src' => 'img/icono-contratistas.png',
-        'title' => 'Contratistas',
-    ],
-    [
-        'src' => 'img/icono-carpinteros.png',
-        'title' => 'Carpinteros',
-    ],
-    [
-        'src' => 'img/icono-tapiceros.png',
-        'title' => 'Tapiceros',
-    ],
-    [
-        'src' => 'img/icono-herreros.png',
-        'title' => 'Herreros',
-    ],
-];
-@endphp --}}
   <!-- Sección de "Proveedores" -->
   <div class="ourSuppliers">
     <h1 style="font-size: 36px; margin-bottom: 20px;">Suppliers</h1>
@@ -102,4 +56,10 @@ $suppliers = [
   <br>
   <x-WhatsAppButton/>
   <x-Footer/>
+  
+  @if ($errors->any())
+    <script type="module">
+        $('#modalService').modal('show');
+    </script>
+    @endif
 @endsection

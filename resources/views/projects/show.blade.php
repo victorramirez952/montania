@@ -73,30 +73,21 @@
     <div class="someReviews d-flex flex-column">
         <h1>Reviews</h1>
         <div class="reviewProyect d-flex p-5 w-75 mx-auto">
-            <div class="reviewEspService w-50">
-                <div>
-                    <img src="{{ asset('img/profileClient.png') }}">
+            @foreach ($reviews as $review)
+                <div class="reviewEspService w-50">
                     <div>
-                        <p style="margin-bottom: 0.5px;">Jhon Doe</p>
-                        <p>Cliente Montania</p>
+                        <img src="{{ asset('img/profileClient.png') }}">
+                        <div>
+                            <p style="margin-bottom: 0.5px;">{{ $review->customer->user->first_names }} {{ $review->customer->user->last_names }}</p>
+                            <p>Cliente Montania</p>
+                        </div>
                     </div>
+                    <p>{{ $review->text }}</p>
                 </div>
-                <p>University road forgive honor examine hard businesslike east speech ship size rare people speech suck
-                    settle
-                    build calm anger grave fate noon else after tonight interest outline quality maybe harvest</p>
-            </div>
-            <div class="reviewEspService w-50">
-                <div>
-                    <img src="{{ asset('img/profileClient.png') }}">
-                    <div>
-                        <p style="margin-bottom: 0.5px;">Jhon Doe</p>
-                        <p>Cliente Montania</p>
-                    </div>
-                </div>
-                <p>University road forgive honor examine hard businesslike east speech ship size rare people speech suck
-                    settle
-                    build calm anger grave fate noon else after tonight interest outline quality maybe harvest</p>
-            </div>
+            @endforeach
         </div>
     </div>
+    
+    <x-WhatsAppButton/>
+    <x-Footer/>
 @endsection

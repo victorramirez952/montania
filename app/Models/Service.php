@@ -19,7 +19,9 @@ class Service extends Model
         'duration',
         'time_units',
         'sessions_number',
-        'link_booking'
+        'link_booking',
+        'principal_service',
+        'description'
     ];
 
     public function getRouteKeyName()
@@ -49,5 +51,9 @@ class Service extends Model
 
     public function images(){
         return $this->morphToMany('App\Models\Image', 'imageable', 'imageable', 'id_image', 'id_image');
+    }
+
+    public function reviews(){
+        return $this->hasMany('App\Models\ReviewService', 'id_service', 'id_service');
     }
 }

@@ -441,7 +441,11 @@ DROP TABLE IF EXISTS `reviews`;
 CREATE TABLE `reviews` (
   `id_review` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `text` text NOT NULL,
-  PRIMARY KEY (`id_review`)
+  `id_customer` int(10) unsigned NOT NULL,
+  `id_project` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_review`),
+  CONSTRAINT `fk_customer_review` FOREIGN KEY (`id_customer`) REFERENCES `customers` (`id_customer`) ON DELETE CASCADE,
+  CONSTRAINT `fk_project_review` FOREIGN KEY (`id_project`) REFERENCES `projects` (`id_project`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -570,6 +574,17 @@ INSERT INTO `users` VALUES (1,'john.doe@example.com','John','Doe',NULL,0,'$2y$10
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+CREATE TABLE `review_service` (
+  `id_review` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `text` text NOT NULL,
+  `id_customer` int(10) unsigned NOT NULL,
+  `id_service` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_review`),
+  CONSTRAINT `fk_customer_review` FOREIGN KEY (`id_customer`) REFERENCES `customers` (`id_customer`) ON DELETE CASCADE,
+  CONSTRAINT `fk_service_review` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_service`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

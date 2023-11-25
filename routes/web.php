@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeliverableController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
+use App\Models\Project;
+use App\Models\Service;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
@@ -23,7 +26,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $services = Service::where('principal_service', true)->orderBy('id_service', 'asc')->get();
+    $projects = Project::orderBy('id_project', 'asc')->get();
+    return view('home', compact('projects', 'services'));
 })->name('publicHome');
 
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
@@ -50,6 +55,7 @@ Route::post('/msg-confirm', function (HttpRequest $request) {
 
 Route::resource('services', ServiceController::class);
 Route::resource('projects', ProjectController::class);
+Route::resource('deliverables', DeliverableController::class);
 Route::resource('customers', CustomerController::class)->names('customers');
 Route::resource('users', UserController::class)->names('users')->middleware('is_admin');
 // Route::resource('users', UserController::class)->names('users')->except(['show'])->middleware('is_admin');

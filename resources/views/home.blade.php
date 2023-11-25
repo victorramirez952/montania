@@ -122,33 +122,27 @@
     <!-- Sección "Principales Servicios" -->
     <div class="mainServices">
         <h1>Our main services</h1>
-        <div class="viewMainServices">
-            <div class="serviceSpace" style="margin-right: 10%;">
-                <p style="font-weight: bold; text-align: start; font-size: 16px;">Design Coaching</p>
-                <p style="text-align: start; font-size: 22px;">$4,999.00 MXN</p>
-                <p style="font-size: 14px; text-align: justify;">Our Design Coaching service at Montania is a unique
-                    opportunity
-                    for those who seek a more interactive
-                    approach to transforming their spaces.</p>
-                <div>
-                    <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
+        <div class="viewMainServices d-flex justify-content-around align-items-center align-items-stretch">
+            @foreach ($services as $service)
+                <div class="serviceSpace d-flex flex-column justify-content-between" style="height: inherit;">
+                    <p style="font-weight: bold; text-align: start; font-size: 16px;">{{ $service->name }}</p>
+                    <p style="text-align: start; font-size: 22px;">
+                        @if ($price = $service->prices->where('price_cover', true)->first())
+                            {{ $price->price }} MXN
+                        @else
+                            No price available
+                        @endif
+                    </p>                    
+                    <p style="font-size: 14px; text-align: justify;">
+                        {{ $service->description }}
+                    </p>
+                    <div>
+                        <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
+                    </div>
+                    <p style="text-align: start; font-size: 14px;"><a href="#" style="color: black;">Learn more...</a></p>
+                    <button type="submit" class="solicitarServicio" onclick="window.location.href = '{{ route('services.show', $service) }}'">Get {{ $service->name }}</button>
                 </div>
-                <p style="text-align: start; font-size: 14px;"><a href="#" style="color: black;">Learn more...</a></p>
-                <button type="submit" class="solicitarServicio">Get Design Coaching</button>
-            </div>
-            <div class="serviceSpace" style="margin-left: 10%;">
-                <p style="font-weight: bold; text-align: start; font-size: 16px;">Design Project</p>
-                <p style="text-align: start; font-size: 22px;">$4,999.00 MXN</p>
-                <p style="font-size: 14px; text-align: justify;">Our Design Project service at Montania is the answer to the
-                    quest for comprehensive solutions in interior design and architecture. We turn your ideas into inspiring
-                    and
-                    functional projects.</p>
-                <div>
-                    <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-                </div>
-                <p style="text-align: start; font-size: 14px;"><a href="#" style="color: black;">Learn more...</a></p>
-                <button type="submit" class="solicitarServicio">Get Design Project</button>
-            </div>
+            @endforeach
         </div>
     </div>
 
@@ -158,21 +152,25 @@
     <!-- Sección "Nuestros proyectos" -->
     <section class="ourProyects">
         <h1>Some of our proyects</h1>
-        <div class="smallProyectCatalogue">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-        </div>
-        <div class="smallProyectCatalogue">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-            <img src="{{ asset('img/Modelo-SalaComedor-1.svg') }}">
-        </div>
-        <a href="{{ route('projects.index') }}"><button type="submit" class="aboutUs">Full protfolio</button></a>
+        @php $projectsPerRow = 5; @endphp
+
+        @foreach ($projects->chunk($projectsPerRow) as $row)
+            <div class="smallProjectCatalogue w-100 mt-2 d-flex justify-content-around">
+                @foreach ($row as $project)
+                <div class="project-image-container col-2 p-0">
+                    <img
+                        src="{{ asset("img/Modelo-SalaComedor-1.svg") }}"
+                        alt="{{ $project->name }}"
+                        class="project-image"
+                    />
+                    <div class="project-overlay absolute" onclick="window.location.href = '{{ route('projects.show', $project) }}'">
+                        <p class="project-name">{{ $project->name }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        @endforeach
+        <a href="{{ route('projects.index') }}"><button type="submit" class="aboutUs mt-4">Full protfolio</button></a>
     </section>
 
     <br>
@@ -180,43 +178,23 @@
     <!-- Sección "Lo que opinan nuestros clientes" -->
     <div class="someReviews">
         <h1>Reviews of our clients</h1>
-        <div class="viewReviews">
-            <div class="clientReview">
-                <div>
-                    <img src="{{ asset('img/profileClient.png') }}">
-                    <div>
-                        <p style="margin-bottom: 0.5px;">Jhon Doe</p>
-                        <p>Cliente Montania</p>
+        <div class="viewReviews d-flex justify-content-center">
+            @foreach ($services as $service)
+                @foreach ($service->reviews as $review)
+                    <div class="clientReview">
+                        <div>
+                            <img src="{{ asset('img/profileClient.png') }}">
+                            <div>
+                                <p style="margin-bottom: 0.5px;">{{ $review->customer->user->first_names }} {{ $review->customer->user->last_names }}</p>
+                                <p>Montania's customer</p>
+                            </div>
+                        </div>
+                        <p>
+                            {{ $review->text }}
+                        </p>
                     </div>
-                </div>
-                <p>University road forgive honor examine hard businesslike east speech ship size rare people speech suck
-                    settle
-                    build calm anger grave fate noon else after tonight interest outline quality maybe harvest</p>
-            </div>
-            <div class="clientReview">
-                <div>
-                    <img src="{{ asset('img/profileClient.png') }}">
-                    <div>
-                        <p style="margin-bottom: 0.5px;">Jhon Doe</p>
-                        <p>Cliente Montania</p>
-                    </div>
-                </div>
-                <p>University road forgive honor examine hard businesslike east speech ship size rare people speech suck
-                    settle
-                    build calm anger grave fate noon else after tonight interest outline quality maybe harvest</p>
-            </div>
-            <div class="clientReview">
-                <div>
-                    <img src="{{ asset('img/profileClient.png') }}">
-                    <div>
-                        <p style="margin-bottom: 0.5px;">Jhon Doe</p>
-                        <p>Cliente Montania</p>
-                    </div>
-                </div>
-                <p>University road forgive honor examine hard businesslike east speech ship size rare people speech suck
-                    settle
-                    build calm anger grave fate noon else after tonight interest outline quality maybe harvest</p>
-            </div>
+                @endforeach
+            @endforeach
         </div>
     </div>
 

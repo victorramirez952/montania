@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreService;
 use App\Models\Categorie_Provider;
 use App\Models\Category_Provider;
 use App\Models\CategoryProvider;
@@ -21,6 +22,17 @@ class ServiceController extends Controller
 
     // Mostrar un curso en particular
     public function show(Service $service){
-        return view('services.show', compact('service'));
+        $reviews = $service->with('reviews')->get();
+        return view('services.show', compact('service', 'reviews'));
+    }
+
+    public function store(StoreService $request){
+        $service = Service::create($request->all());
+        return redirect()->route('services.index');
+    }
+
+    public function update(Request $request, Service $service){
+        $service->update($request->all());
+        return redirect()->route('services.show', $service);
     }
 }

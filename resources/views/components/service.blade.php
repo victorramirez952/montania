@@ -7,10 +7,12 @@
     @endif
     <p style="font-weight: bold; font-size: 18px;">{{ $service->name }}</p>
     @foreach ($service->prices as $price)
-        @if ($price->m2 == true)
-            <p style="font-size: 18px;">Desde {{ $price->price }} x m2</p>
-        @else
-            <p style="font-size: 18px;">Desde {{ $price->price }}</p>
+        @if ($price->price_cover)
+            @if ($price->m2 == true)
+                <p style="font-size: 18px;">Desde {{ $price->price }} x m2</p>
+            @else
+                <p style="font-size: 18px;">Desde {{ $price->price }}</p>
+            @endif
         @endif
     @endforeach
 </div>

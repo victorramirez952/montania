@@ -35,4 +35,7 @@ class Customer extends Model
     public function projects(){
         return $this->belongsToMany('App\Models\Project', 'customer_project', 'id_customer', 'id_project');
     }
+    public function reviews(){
+        return $this->hasMany('App\Models\Review', 'id_customer', 'id_customer');
+    }
 }
