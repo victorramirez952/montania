@@ -6,6 +6,7 @@ use App\Http\Requests\StoreService;
 use App\Models\Categorie_Provider;
 use App\Models\Category_Provider;
 use App\Models\CategoryProvider;
+use App\Models\Project;
 use App\Models\Provider;
 use App\Models\Service;
 use Illuminate\Http\Request;

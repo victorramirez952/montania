@@ -1,7 +1,7 @@
-@props(['service', 'deliverable'])
+@props(['service', 'deliverable', 'id'])
 
 <!-- Modal -->
-<div class="modal fade" id="modalDeliverable" tabindex="-1" role="dialog" aria-labelledby="modalDeliverableLabel" aria-hidden="true">
+<div class="modal fade" id="{{ $id }}" tabindex="-1" role="dialog" aria-labelledby="modalDeliverableLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,7 +17,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="deliverableForm" action="{{ $deliverable ? route('deliverables.update', $deliverable, $service) : route('deliverables.store') }}" method="POST" class="needs-validation" novalidate>
+                <form id="deliverableForm" action="{{ $deliverable ? route('deliverables.update', $deliverable) : route('deliverables.store') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
                     @if($deliverable)
                         @method('PUT')
@@ -29,7 +29,7 @@
 
                     <div class="form-group">
                         <label for="title">Deliverable Title:</label>
-                        <input type="text" value="{{ $deliverable->title ?? 'Deliverable Z' }}" class="form-control" id="title" name="title" required>
+                        <input type="text" value="{{ old('title', $deliverable->title ?? 'Deliverable Z') }}"class="form-control" id="title" name="title" required>
                         @error('title')
                             <div class="alert alert-danger text" role="alert" style="font-size: 12px">
                                 {{ $message }}
@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         <label for="deliverable_description">Deliverable Description:</label>
-                        <textarea class="form-control" id="deliverable_description" name="deliverable_description" required>{{ $deliverable->description ?? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem placeat, debitis dignissimos maiores unde vero fugit quis, molestiae et vitae ut dolore eum repellendus inventore facere, corrupti quas voluptatum'}}</textarea>
+                        <textarea class="form-control" id="deliverable_description" name="deliverable_description" required>{{ old('deliverable_description', $deliverable->description ?? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit rem placeat, debitis dignissimos maiores unde vero fugit quis, molestiae et vitae ut dolore eum repellendus inventore facere, corrupti quas voluptatum') }}</textarea>
                         @error('deliverable_description')
                             <div class="alert alert-danger text" role="alert" style="font-size: 12px">
                                 {{ $message }}

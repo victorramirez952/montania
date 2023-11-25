@@ -4,7 +4,8 @@
 
 @section('content')
     <x-ModalService :service="$service"/>
-    <x-ModalDeliverable :service="$service" :deliverable="$deliverable ?? null"/>
+    <x-ModalDeliverable :service="$service" :deliverable="$deliverable ?? null" :id="'modalDeliverable'"/>
+    <x-ModalEliminar/>
     <x-Navbar/>
     <!-- Header Servicio "Design Coaching" -->
     <header class="title-bg title">
@@ -72,16 +73,15 @@
       <tr>
         @foreach ($service->deliverables as $deliverable)
           <td>
-            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mb-4" data-toggle="modal" data-target="#modalDeliverable">
+            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mb-4" onclick="window.location.href = '{{ route('deliverables.show', ['service' => $service, 'deliverable' => $deliverable]) }}'">
               <i class="fa-solid fa-pen-to-square text-white"></i> Edit deliverable
+            </button>
+            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mb-4" data-toggle="modal" data-target="#modalEliminar" onclick="setDeleteForm('{{ route('deliverables.destroy', $deliverable) }}')">
+              <i class="fa-solid fa-trash text-white"></i> Delete deliverable
             </button>
             <p style="font-weight: bold;">{{ $deliverable->title }}</p>
             <ol class="lista">
                 <li>{{ $deliverable->description }}</li>
-                {{-- <li>Style and inspiration moodboard.</li>
-                <li>Palette of colors, textures and materials.</li>
-                <li>Elevations of walls and furniture on design.</li>
-                <li>Shopping list - style, color, material and dimensions.</li> --}}
             </ol>
           </td>
         @endforeach
@@ -165,4 +165,11 @@
       $('#modalDeliverable').modal('show');
   </script>
   @endif
+
+  <script>
+    function setDeleteForm(action) {
+        // Set the action attribute and id value for the delete form
+        document.getElementById('deleteForm').action = action;
+    }
+  </script>
 @endsection

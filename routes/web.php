@@ -56,6 +56,8 @@ Route::post('/msg-confirm', function (HttpRequest $request) {
 Route::resource('services', ServiceController::class);
 Route::resource('projects', ProjectController::class);
 Route::resource('deliverables', DeliverableController::class);
+Route::get('/deliverables/{service}/show/{deliverable}', [DeliverableController::class, "show"])->name('deliverables.show');
+
 Route::resource('customers', CustomerController::class)->names('customers');
 Route::resource('users', UserController::class)->names('users')->middleware('is_admin');
 // Route::resource('users', UserController::class)->names('users')->except(['show'])->middleware('is_admin');
