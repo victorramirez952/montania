@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
+use App\Models\Customer;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,15 @@ class ProjectController extends Controller
     }
 
     public function store(ProjectRequest $request){
-        $project = Project::create($request->all());
-        return redirect()->route('projects.show', $project);
-    }
+        // Create a new project
+        $project = Project::create($request->except('id_customer'));
+    
+        // Attach the project to the customer
+        $customer = Customer::find($request->input('id_customer'));
+        $customer->projects()->attach($project);
+    
+        return back()->with('success', 'Project created successfully!');
+    }    
 
     public function update(ProjectRequest $request, Project $project){
         $project->update($request->all());

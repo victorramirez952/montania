@@ -26,12 +26,12 @@
                 <li class="nav-item">
                     @if (Auth::user())
                         @cannot('users.index')
-                            <a class="nav-link" href="{{ route('customers.show', Auth::user()) }}" style="color: #EBE5D3">My
+                            <a class="nav-link" href="{{ route('customers.resetDefaultProject', Auth::user()) }}" style="color: #EBE5D3">My
                                 profile</a>
                         @endcannot
                         @can('users.index')
                             <a class="nav-link" href="{{ route('customers.index', Auth::user()) }}"
-                                style="color: #EBE5D3">Clientes</a>
+                                style="color: #EBE5D3">Customers</a>
                         @endcan
                     @else
                         <a class="nav-link" href="{{ route('login') }}" style="color: #EBE5D3">I'm Customer</a>

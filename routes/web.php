@@ -73,6 +73,8 @@ Route::delete('reviews/{review}/destroy', [ReviewController::class, "destroy"])-
 Route::get('/deliverables/{service}/show/{deliverable}', [DeliverableController::class, "show"])->name('deliverables.show');
 
 Route::resource('customers', CustomerController::class)->names('customers'); 
+Route::get('customers/resetDefaultProject/{customer}', [CustomerController::class, 'resetDefaultProject'])->name('customers.resetDefaultProject');
+
 Route::resource('users', UserController::class)->names('users')->middleware('is_admin');
 Route::get('/user/search', [UserController::class, "search"])->name('user.search');
 // Route::resource('users', UserController::class)->names('users')->except(['show'])->middleware('is_admin');

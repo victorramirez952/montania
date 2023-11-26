@@ -3,7 +3,7 @@
 @section('title', 'Portafolio')
 
 @section('content')
-    <x-ModalProject :project="$project ?? null"/>
+    {{-- <x-ModalProject :project="$project ?? null"/> --}}
     <x-Navbar/>
     <header class="title-bg title">
         <p class="text-center" style="font-size: 45px;">Portfolio</p>
@@ -18,11 +18,11 @@
           </div>
         </div>
     </div> --}}
-    <div class="container">
+    {{-- <div class="container">
         <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalProject">
             <i class="fa-solid fa-plus text-white"></i> Add project
         </button>
-    </div>
+    </div> --}}
     <div class="container mt-5">
         @foreach (array_chunk($projects->get()->all(), 3) as $projectChunk)
             <div class="row">
@@ -41,9 +41,9 @@
             </div>
         @endforeach
         <!-- Opción de ver más imágenes -->
-        <div class="ver-mas columna">
+        {{-- <div class="ver-mas columna">
             <button class="btn btn-primary">Ver Más Imágenes</button>
-        </div>
+        </div> --}}
     </div>
     {{-- <ul>
         @foreach ($projects as $project)

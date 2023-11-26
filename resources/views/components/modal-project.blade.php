@@ -1,4 +1,4 @@
-@props(['project'])
+@props(['customer', 'project'])
 <!-- Modal -->
 <div class="modal fade" id="modalProject" tabindex="-1" role="dialog" aria-labelledby="modalProjectLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -21,6 +21,7 @@
                     @if($project)
                         @method('PUT')
                     @endif
+                    <input type="hidden" name="id_customer" id="id_customer" value="{{ $customer->id_customer }}">
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" value="{{ old('name', $project->name ?? 'Project Z') }}" class="form-control" id="name" name="name" required>

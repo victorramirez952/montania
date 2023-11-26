@@ -4,7 +4,7 @@
 @section('body-style', 'background-color: #EBE5D3;')
 
 @section('content')
-    <x-ModalProject :project="$defaultProject ?? null" />
+    <x-ModalProject :customer="$customer ?? null" :project="$defaultProject ?? null" />
     <x-ModalProjectsUser :customer="$customer ?? null" :projects="$projects" :defaultProject="$defaultProject ?? null" />
     <x-ModalCustomer :user="$customer->user ?? null" />
     @if (!empty($defaultProject))
@@ -54,8 +54,13 @@
                 data-target="#modalProjectUser">
                 <i class="fa-solid fa-ellipsis"></i>
             </button>
-            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal"
-                data-target="#modalProject">
+            <button type="button"
+            class="btn btn-primary pmd-btn-icon pmd-ripple-effect d-flex justify-content-center align-items-center"
+            data-toggle="modal" data-target="#modalProject" onclick="setCreateProjectForm('{{ route('projects.store') }}')">
+            <i class="fa-solid fa-plus text-white h6"></i>Add Project
+            </button>
+            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect ml-1" data-toggle="modal"
+                data-target="#modalProject" onclick="setEditProjectForm('{{ route('projects.update', ['project' => $defaultProject]) }}')">
                 <i class="fa-solid fa-pen-to-square text-white"></i> Edit project
             </button>
         </div>
@@ -228,8 +233,16 @@
             </div>
         </div>
     @else
-        <h5 class="text-center">Without projects</h5>        
+    <div class="container d-flex flex-column align-items-center my-4 justify-content-center">
+        <h5 class="text-center">Without projects</h5>
+        {{-- <button type="button"
+            class="btn btn-primary pmd-btn-icon pmd-ripple-effect d-flex justify-content-center align-items-center"
+            data-toggle="modal" data-target="#modalProject">
+            <i class="fa-solid fa-plus text-white h6"></i>Add Project
+        </button> --}}
+    </div>
     @endif
+    
 
     <x-WhatsAppButton />
     <x-Footer />
@@ -275,4 +288,32 @@
             document.getElementById('deleteForm').action = action;
         }
     </script>
+
+<script>
+    function setCreateProjectForm(action) {
+        // Set the action attribute and id value for the delete form
+        document.getElementById('modalProject').action = action;
+        document.getElementById('modalProjectLabel').innerHTML = "Add Project"
+        // var modal = document.getElementById('modalProject');
+        //     modal.querySelector('#name').value = '';
+        //     modal.querySelector('#place').value = '';
+        //     modal.querySelector('#start_date').value = '',
+        //     modal.querySelector('#end_date').value = '',
+        //     modal.querySelector('#type').value = 'Residencial';
+        //     modal.querySelector('#description').value = 'Lorem ipsum';
+    }
+    function setEditProjectForm(action) {
+        // Set the action attribute and id value for the delete form
+        document.getElementById('modalProject').action = action;
+        document.getElementById('modalProjectLabel').innerHTML = "Edit Project";
+        
+        // var modal = document.getElementById('modalProject');
+        //     modal.querySelector('#name').value = '';
+        //     modal.querySelector('#place').value = '';
+        //     modal.querySelector('#start_date').value = '',
+        //     modal.querySelector('#end_date').value = '',
+        //     modal.querySelector('#type').value = 'Residencial';
+        //     modal.querySelector('#description').value = 'Lorem ipsum';
+    }
+</script>
 @endsection
