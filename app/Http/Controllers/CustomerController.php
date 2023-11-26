@@ -18,13 +18,20 @@ class CustomerController extends Controller
     }
 
     // Mostrar un curso en particular
-    public function show(Customer $customer){
-        return view('customers.show', compact('customer'));
+    public function show(Customer $customer, Request $request){
+        $selectedProjectId = $request->input('default_project', session('id_default_project', 1));
+        session(['id_default_project' => $selectedProjectId]);
+    
+        $defaultProject = Project::find($selectedProjectId);
+        $projects = $customer->projects()->get();
+    
+        return view('customers.show', compact('customer', 'projects', 'defaultProject'));
     }
 
     // Mostrar un curso en particular
-    public function resources(Customer $customer){
+    public function resources(Customer $customer, Project $defaultProject){
         $projects = $customer->projects()->get();
-        return view('customers.resources', compact('customer', 'projects'));
+        $resources = $defaultProject->resources()->get();
+        return view('customers.resources', compact('customer', 'resources', 'projects', 'defaultProject'));
     }
 }

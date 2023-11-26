@@ -64,7 +64,9 @@ Route::get('/user/search', [UserController::class, "search"])->name('user.search
 // Route::resource('users', UserController::class)->names('users')->except(['show'])->middleware('is_admin');
 // Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 
-Route::get('customers/{customer}/resources', [CustomerController::class, 'resources'])->name('customers.resources');
+Route::get('customers/{customer}/resources/{defaultProject}', [CustomerController::class, 'resources'])->name('customers.resources');
+Route::post('/customers/{customer}/showWithDefaultProject', [CustomerController::class, "showWithDefaultProject"])
+    ->name('customers.showWithDefaultProject');
 // Route::controller(ClientController::class)->group(function(){
 //     Route::get('/clients', "index")->name('clients.index');
 //     Route::get('/clients/projects', "projects")->name('clients.projects');

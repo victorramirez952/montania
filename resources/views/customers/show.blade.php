@@ -5,6 +5,7 @@
 
 @section('content')
     {{-- <h1>Bienvenido a la pagina del cliente: {{$customer->user->first_names}}</h1> --}}
+    <x-ModalProjectsUser :customer="$customer ?? null" :projects="$projects ?? null" :defaultProject="$defaultProject" />
     <x-Navbar/>
     <!-- Contenido de la pag -->
     <div class="container" style="margin: auto; margin-top: 150px; margin-bottom: 110px;">
@@ -26,10 +27,72 @@
         </div>
     </div>
     
-    <button onclick="window.location.href = '{{ route('customers.resources', ['customer' => $customer]) }}'">Recursos</button>
     <div style="background-color: white; padding: 10px; color: white;"></div>
     
-    <h4 class="w-100 py-5 text-center">Dashboard</h4>
+    <h4 class="w-100 py-2 text-center">Dashboard</h4>
+    {{-- @if ($defaultProject)
+        <h4>Hay defaultProject: {{ $defaultProject->name }}</h4>
+    @endif --}}
+
+    <div class="container d-flex align-items-center p-2">
+      <p class="text-center p-0 m-0 h-100">{{ $defaultProject->name }}</p>
+      <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mx-4" data-toggle="modal" data-target="#modalProjectUser">
+        <i class="fa-solid fa-ellipsis"></i>
+      </button>
+    </div>
+    
+    <div class="container d-flex justify-content-between p-0">
+      <x-SidebarUser :customer="$customer" :defaultProject="$defaultProject"/>
+
+      <div class="w-75 p-4 d-flex flex-column">
+        <h4>{{ $defaultProject->name }}</h4>
+        <h6>{{ $defaultProject->type }}</h6>
+        <div class="p-0">
+          @php
+          // Set your lower and upper date values
+          // $lowerDate = strtotime('2023-01-01');
+          // $upperDate = strtotime('2024-12-12');
+          $lowerDate = strtotime($defaultProject->start_date);
+          $upperDate = strtotime($defaultProject->end_date);
+  
+          // Get the current date
+          $today = date("Y-m-d H:i:s");
+          $currentDate = now()->setTimezone('America/Monterrey')->timestamp;
+  
+          // Calculate the raw progress percentage
+          $rawProgressPercentage = (($currentDate - $lowerDate) / ($upperDate - $lowerDate)) * 100;
+
+          // Ensure the progress percentage stays within the range of 0% to 100%
+          $progressPercentage = max(0, min(100, $rawProgressPercentage));
+
+          // Format progress percentage with 2 decimal places
+          $formattedProgress = number_format($progressPercentage, 2);
+          @endphp  
+
+          <h6>Project progress: {{ $formattedProgress }}%</h6>
+          <div class="progress mt-3 border border-secondary" style="height: 50px;">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="background-color: #223326; width: {{ $progressPercentage }}%;" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100">
+              </div>
+              <div class="progress-bar bg-white" role="progressbar" style="width: {{ 100 - $progressPercentage }}%;" aria-valuenow="{{ 100 - $progressPercentage }}" aria-valuemin="0" aria-valuemax="100">
+              </div>
+            </div>
+            <div class="container d-flex justify-content-between">
+              <div class="d-flex flex-column align-items-center">
+                <small>Start</small>
+                <small>{{ date('Y-m-d', $lowerDate) }}</small>
+              </div>
+              <div class="d-flex flex-column align-items-center">
+                <small>Today</small>
+                <small>{{ now()->format('Y-m-d') }}</small>
+              </div>
+              <div class="d-flex flex-column align-items-center">
+                <small>End</small>
+                <small>{{ date('Y-m-d', $upperDate) }}</small>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
 
     <div style="background-color: white; padding: 10px; color: white;">h</div>
 
