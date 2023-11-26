@@ -58,4 +58,16 @@ class UserController extends Controller
 
         return redirect()->route('users.index', $user);
     }
+
+    public function search(Request $request){
+        $query = $request->input('query');
+        
+        $results = User::where('id_user', 'LIKE', "%$query%")
+                    ->orWhere('last_names', 'LIKE', "%$query%")
+                    ->orWhere('first_names', 'LIKE', "%$query%")
+                    ->orWhere('email', 'LIKE', "%$query%")
+                    ->get();
+
+        return response()->json(['results' => $results]);
+    }
 }

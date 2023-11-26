@@ -60,6 +60,7 @@ Route::get('/deliverables/{service}/show/{deliverable}', [DeliverableController:
 
 Route::resource('customers', CustomerController::class)->names('customers');
 Route::resource('users', UserController::class)->names('users')->middleware('is_admin');
+Route::get('/user/search', [UserController::class, "search"])->name('user.search');
 // Route::resource('users', UserController::class)->names('users')->except(['show'])->middleware('is_admin');
 // Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 
