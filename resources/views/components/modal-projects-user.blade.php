@@ -16,11 +16,19 @@
                     @csrf
                     <div class="form-group">
                         <select class="form-control" id="default_project" name="default_project" required>
-                        @foreach ($projects as $project)
-                            <option value="{{ $project->id_project }}" {{ $project->id_project == $defaultProject->id_project ? 'selected' : '' }}>
-                                {{ $project->name }}
-                            </option>
-                        @endforeach
+                            @if (!empty($projects))
+                                @foreach ($projects as $project)
+                                    @if (!empty($defaultProject))
+                                        <option value="{{ $project->id_project }}" {{ $project->id_project == $defaultProject->id_project ? 'selected' : '' }}>
+                                            {{ $project->name }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $project->id_project }}">
+                                            {{ $project->name }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                     <div class="modal-footer">

@@ -24,8 +24,8 @@ class ReviewRequest extends FormRequest
     public function rules(){
         return [
             'text' => 'required',
-            'id_customer' => 'required|integer|exists:customers,id_customer', // Assuming 'customers' is the related table
-            'id_project' => 'required|integer|exists:projects,id_project', // Assuming 'projects' is the related table
+            // 'id_customer' => 'required|integer|exists:customers,id_customer', // Assuming 'customers' is the related table
+            // 'id_project' => 'required|integer|exists:projects,id_project', // Assuming 'projects' is the related table
         ];
     }
     }

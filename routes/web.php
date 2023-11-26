@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliverableController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StageController;
 use App\Http\Controllers\UserController;
@@ -64,6 +65,10 @@ Route::delete('stages/{stage}/destroy/{customer}', [StageController::class, "des
 Route::resource('resources', ResourceController::class);
 Route::post('resources/store/{customer}/{defaultProject}', [ResourceController::class, "store"])->name('resources.store');
 Route::put('resources/update/{defaultProject}', [ResourceController::class, "update"])->name('resources.update');
+Route::resource('reviews', ReviewController::class);
+Route::post('reviews/store', [ReviewController::class, "store"])->name("reviews.store");
+Route::put('reviews/update', [ReviewController::class, "update"])->name("reviews.update");
+Route::delete('reviews/{review}/destroy', [ReviewController::class, "destroy"])->name("reviews.destroy");
 
 Route::get('/deliverables/{service}/show/{deliverable}', [DeliverableController::class, "show"])->name('deliverables.show');
 

@@ -4,7 +4,7 @@
 
 @section('content')
     <x-ModalProject :project="$project ?? null"/>
-    <x-ModalReview :project="$project ?? null" :review="$review ?? null"/>
+    {{-- <x-ModalReview :project="$project ?? null" :review="$review ?? null"/> --}}
     <x-ModalEliminar/>
     <x-Navbar />
     <!-- Header Proyecto Especifico -->
@@ -81,16 +81,11 @@
     <br>
     <br>
     <!-- Sección Reviews -->
-    {{-- <div class="someReviews d-flex flex-column">
+    <div class="someReviews d-flex flex-column">
         <h1>Reviews</h1>
-        <div class="container">
-            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalReview">
-                <i class="fa-solid fa-plus text-white"></i> Add review
-            </button>
-        </div>
-        <div class="reviewProyect d-flex p-5 w-75 mx-auto">
+        <div class="reviewProyect d-flex justify-content-center p-5 w-75 mx-auto">
             @foreach ($reviews as $review)
-                <div class="reviewEspService w-50">
+                <div class="reviewEspService">
                     <div>
                         <img src="{{ asset('img/profileClient.png') }}">
                         <div>
@@ -102,7 +97,7 @@
                 </div>
             @endforeach
         </div>
-    </div> --}}
+    </div>
     
     <x-WhatsAppButton/>
     <x-Footer/>

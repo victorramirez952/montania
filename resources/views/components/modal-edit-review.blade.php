@@ -1,31 +1,30 @@
-@props(['customer', 'project', 'review'])
+@props(['project', 'review'])
 <!-- Modal -->
-<div class="modal fade" id="modalReview" tabindex="-1" role="dialog" aria-labelledby="modalReviewLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditReview" tabindex="-1" role="dialog" aria-labelledby="modalEditReviewLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalReviewLabel">
-                    Add New Review
+                <h5 class="modal-title" id="modalEditReviewLabel">
+                    Edit Review
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="reviewForm" action="{{ route('reviews.store') }}" method="POST" class="needs-validation" novalidate>
+                <form id="editReviewForm," action="{{ route('reviews.update') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
+                    @method('PUT')
                     {{-- <div class="form-group">
                         <label for="user_search">Search User:</label>
                         <input type="text" class="form-control" id="user_search" name="user_search" placeholder="Enter ID, Last Name, First Name, or Email">
                     </div>
                     <div id="search_results"></div> --}}
                     <h4>Project: {{ $project->name }}</h4>
-                    <input type="hidden" name="id_review" id="id_review" value="">
-                    <input type="hidden" name="id_customer" id="id_customer" value="{{ $customer->id_customer }}">
-                    <input type="hidden" name="id_project" id="id_project" value="{{ $project->id_project }}">
+                    <input type="hidden" name="id_review" id="edit_id_review" value="">
                     <div class="form-group">
-                        <label for="text">Text:</label>
-                        <textarea class="form-control" id="text" name="text">{{ old('text', $review->text ?? 'Lorem ipsum') }}</textarea>
+                        <label for="edit_text">Text:</label>
+                        <textarea class="form-control" id="edit_text" name="text">{{ old('text', 'Lorem ipsum') }}</textarea>
                         @error('text')
                         <div class="alert alert-danger text" role="alert" style="font-size: 12px">
                             {{ $message }}

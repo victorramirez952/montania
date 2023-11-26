@@ -20,13 +20,23 @@ class CustomerController extends Controller
 
     public function show(Customer $customer, Request $request){
         $selectedProjectId = $request->input('default_project', session('id_default_project', 1));
+    
         session(['id_default_project' => $selectedProjectId]);
     
         $projects = $customer->projects()->get();
-        $defaultProject = Project::find($selectedProjectId);
-        $stages = $defaultProject->stages()->orderBy('date', 'desc')->get();
-        return view('customers.show', compact('customer', 'projects', 'defaultProject', 'stages'));
-    }
+        
+        // Find the default project by id or get the first project if it doesn't exist
+        $defaultProject = Project::find($selectedProjectId) ?? $projects->first();
+    
+        if ($defaultProject) {
+            // The project is found
+            $stages = $defaultProject->stages()->orderBy('date', 'desc')->get();
+            return view('customers.show', compact('customer', 'projects', 'defaultProject', 'stages'));
+        } else {
+            // No projects available
+            return view('customers.show', compact('customer', 'projects'));
+        }
+    }    
 
     public function resources(Customer $customer, Project $defaultProject){
         $projects = $customer->projects()->get();
