@@ -22,10 +22,10 @@ class CustomerController extends Controller
         $selectedProjectId = $request->input('default_project', session('id_default_project', 1));
         session(['id_default_project' => $selectedProjectId]);
     
-        $defaultProject = Project::find($selectedProjectId);
         $projects = $customer->projects()->get();
-    
-        return view('customers.show', compact('customer', 'projects', 'defaultProject'));
+        $defaultProject = Project::find($selectedProjectId);
+        $stages = $defaultProject->stages()->orderBy('date', 'desc')->get();
+        return view('customers.show', compact('customer', 'projects', 'defaultProject', 'stages'));
     }
 
     // Mostrar un curso en particular

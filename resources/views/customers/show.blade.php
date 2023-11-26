@@ -96,6 +96,55 @@
 
     <div style="background-color: white; padding: 10px; color: white;">h</div>
 
+    <div class="container d-flex justify-content-center my-3">
+      <h2>Montania's process</h2>
+    </div>
+    <div class="container">
+        <div class="d-flex mb-2 w-50 mx-auto">
+          <div class="col-3">
+              <h5>{{ $defaultProject->end_date }}</h5>
+          </div>
+          <div class="col-3 d-flex justify-content-center">
+              @if ($formattedProgress >= 0)
+                  <i class="fa-solid fa-circle text-primary h2"></i>
+              @else
+                  <i class="fa-regular fa-circle text-primary h2"></i>
+              @endif
+          </div>
+          <div class="col-6">
+              <h5>Fin</h5>
+          </div>
+      </div>
+      @foreach ($stages as $stage)
+          <div class="d-flex mb-2 w-50 mx-auto">
+              <div class="col-3">
+                  <h5>{{ $stage->date }}</h5>
+              </div>
+              <div class="col-3 d-flex justify-content-center">
+                  @if ($stage->completed)
+                      <i class="fa-solid fa-circle text-primary h2"></i>
+                  @else
+                      <i class="fa-regular fa-circle text-primary h2"></i>
+                  @endif
+              </div>
+              <div class="col-6">
+                  <h5>{{ $stage->description }}</h5>
+              </div>
+          </div>
+      @endforeach
+      <div class="d-flex mb-2 w-50 mx-auto">
+        <div class="col-3">
+            <h5>{{ $defaultProject->start_date }}</h5>
+        </div>
+        <div class="col-3 d-flex justify-content-center">
+          <i class="fa-solid fa-circle text-primary h2"></i>
+        </div>
+        <div class="col-6">
+            <h5>Inicio</h5>
+        </div>
+      </div>
+  </div>  
+
     <x-WhatsAppButton/>
     <x-Footer/>
 @endsection

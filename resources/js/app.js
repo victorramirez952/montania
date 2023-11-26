@@ -1,5 +1,6 @@
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
+import '@fortawesome/fontawesome-free/js/regular';
 
 // Change it to import Bootstrap 4.3.1
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
