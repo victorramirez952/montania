@@ -112,4 +112,11 @@
         $('#modalProject').modal('show');
     </script>
     @endif
+
+    <script>
+        function setDeleteForm(action) {
+            // Set the action attribute and id value for the delete form
+            document.getElementById('deleteForm').action = action;
+        }
+    </script>
 @endsection

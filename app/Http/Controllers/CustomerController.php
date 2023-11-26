@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use App\Models\Project;
 use App\Models\User;
@@ -17,7 +18,6 @@ class CustomerController extends Controller
         return view('customers.index', compact('customers'));
     }
 
-    // Mostrar un curso en particular
     public function show(Customer $customer, Request $request){
         $selectedProjectId = $request->input('default_project', session('id_default_project', 1));
         session(['id_default_project' => $selectedProjectId]);
@@ -28,10 +28,28 @@ class CustomerController extends Controller
         return view('customers.show', compact('customer', 'projects', 'defaultProject', 'stages'));
     }
 
-    // Mostrar un curso en particular
     public function resources(Customer $customer, Project $defaultProject){
         $projects = $customer->projects()->get();
         $resources = $defaultProject->resources()->get();
         return view('customers.resources', compact('customer', 'resources', 'projects', 'defaultProject'));
+    }
+
+    public function update(CustomerRequest $request, $id_user){
+        $user = User::find($id_user);
+        $user->update($request->only([
+            'email',
+            'first_names',
+            'last_names',
+            'avatar_image',
+        ]));
+        $user->customer()->update(
+            $request->only([
+                'phone',
+                'address',
+                'second_email',
+            ])
+        );
+        $customer = Customer::find($user->customer->id_customer);
+        return redirect()->route('customers.show', $customer);
     }
 }

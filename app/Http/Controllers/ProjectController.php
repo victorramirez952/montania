@@ -28,7 +28,7 @@ class ProjectController extends Controller
 
     public function update(ProjectRequest $request, Project $project){
         $project->update($request->all());
-        return redirect()->route('projects.show', $project);
+        return back()->with('success', 'Project edited successfully!');
     }
 
     public function destroy(Project $project){

@@ -54,6 +54,6 @@ class User extends Authenticatable
     }
 
     public function customer() {
-        return $this->belongsTo('App\Models\Customer');
+        return $this->hasOne('App\Models\Customer', 'id_user');
     }
 }

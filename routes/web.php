@@ -4,7 +4,9 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliverableController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\StageController;
 use App\Http\Controllers\UserController;
 use App\Models\Project;
 use App\Models\Service;
@@ -13,6 +15,7 @@ use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\VarDumper\Caster\ResourceCaster;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +59,15 @@ Route::post('/msg-confirm', function (HttpRequest $request) {
 Route::resource('services', ServiceController::class);
 Route::resource('projects', ProjectController::class);
 Route::resource('deliverables', DeliverableController::class);
+Route::resource('stages', StageController::class);
+Route::delete('stages/{stage}/destroy/{customer}', [StageController::class, "destroy"])->name("stages.destroy");
+Route::resource('resources', ResourceController::class);
+Route::post('resources/store/{customer}/{defaultProject}', [ResourceController::class, "store"])->name('resources.store');
+Route::put('resources/update/{defaultProject}', [ResourceController::class, "update"])->name('resources.update');
+
 Route::get('/deliverables/{service}/show/{deliverable}', [DeliverableController::class, "show"])->name('deliverables.show');
 
-Route::resource('customers', CustomerController::class)->names('customers');
+Route::resource('customers', CustomerController::class)->names('customers'); 
 Route::resource('users', UserController::class)->names('users')->middleware('is_admin');
 Route::get('/user/search', [UserController::class, "search"])->name('user.search');
 // Route::resource('users', UserController::class)->names('users')->except(['show'])->middleware('is_admin');

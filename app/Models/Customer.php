@@ -13,6 +13,7 @@ class Customer extends Model
     protected $primaryKey = 'id_customer';
 
     protected $fillable = [
+        'id_customer',
         'phone',
         'address',
         'second_email',
@@ -25,7 +26,7 @@ class Customer extends Model
     }
 
     public function user() {
-        return $this->hasOne('App\Models\User', 'id_user', 'id_user');
+        return $this->belongsTo('App\Models\User', 'id_user', 'id_user');
     }
 
     public function services(){

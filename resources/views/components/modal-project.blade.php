@@ -16,7 +16,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="addprojectForm" action="{{ $project ? route('projects.update', $project) : route('projects.store') }}" method="POST" class="needs-validation" novalidate>
+                <form id="projectForm" action="{{ $project ? route('projects.update', $project) : route('projects.store') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
                     @if($project)
                         @method('PUT')

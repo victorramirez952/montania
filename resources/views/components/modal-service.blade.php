@@ -49,7 +49,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="Time Units:">Time Units:</label>
+                        <label for="time_units">Time Units:</label>
                         <select class="form-control" id="time_units" name="time_units" required>
                             <option value="Minutes" {{ isset($service) && $service->time_units == 'Minutes' ? 'selected' : '' }}>Minutes</option>
                             <option value="Hours" {{ isset($service) && $service->time_units == 'Hours' ? 'selected' : '' }}>Hours</option>
