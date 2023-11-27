@@ -13,7 +13,7 @@
             <div class="col-md-3" style="color: #EBE5D3">
                 <p>SERVICES</p>
                 <p><a href="{{ route('publicHome') }}" style="color: #EBE5D3">What we do</a></p>
-                <p><a href="{{ route('projects.index') }}" style="color: #EBE5D3">Proyects</a></p>
+                <p><a href="{{ route('projects.index') }}" style="color: #EBE5D3">Projects</a></p>
             </div>
             <div class="col-md-3" style="color: #EBE5D3">
                 <p>SOCIAL MEDIA</p>

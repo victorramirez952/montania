@@ -1,0 +1,1 @@
+<h2>¡Hola {{ $name }}! Gracias por ponerte en contacto con <b>Montania</b>. Atenderemos tu solicitud lo más pronto posible</h2>

@@ -9,14 +9,19 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StageController;
 use App\Http\Controllers\UserController;
+use App\Mail\SendEmail;
 use App\Models\Project;
 use App\Models\Service;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\VarDumper\Caster\ResourceCaster;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session as FacadesSession;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,10 +56,24 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::post('/msg-confirm', function (HttpRequest $request) {
-    $name = $request->input('name');
-    return view('msg-confirm', compact('name'));
+Route::get('/msg-confirm/{name?}', function ($name = null) {
+    $error = session('error'); // Retrieve the flashed error message
+
+    return view('msg-confirm', compact('name', 'error'));
 })->name('msg-confirm');
+
+Route::post('send_email', function(HttpRequest $request){
+    $name = $request->input('name');
+
+    try {
+        Mail::to("victorram2003@gmail.com")->send(new SendEmail($name));
+        return Redirect::route('msg-confirm', ['name' => $name]);
+    } catch (\Exception $e) {
+        // Handle the error, and flash an error message to the session
+        FacadesSession::flash('error', 'There was an error sending the email.');
+        return Redirect::back();
+    }
+})->name('send_email');
 
 
 Route::resource('services', ServiceController::class);

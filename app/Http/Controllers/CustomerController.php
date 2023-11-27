@@ -51,9 +51,20 @@ class CustomerController extends Controller
             'email' => $request->input('email'),
             'first_names' => $request->input('first_names'),
             'last_names' => $request->input('last_names'),
-            'avatar_image' => $request->input('avatar_image'),
             'password' => Hash::make($request->input('password')), // Adjust this based on your password field name
         ]);
+
+        // Handle file upload separately
+        if ($request->hasFile('avatar_image')) {
+            $file = $request->file('avatar_image');
+            $maxFileSize = 1048576; // 1 MB
+
+            if ($file->isValid() && $file->getSize() <= $maxFileSize) {
+                // Handle the file upload (store it in the database or file system)
+            } else {
+                return redirect()->back()->withErrors(['avatar_image' => 'Invalid or too large file.']);
+            }
+        }
     
         // Create a new customer instance and associate it with the user
         $customer = $user->customer()->create([
@@ -67,12 +78,22 @@ class CustomerController extends Controller
 
     public function update(CustomerRequest $request, $id_user){
         $user = User::find($id_user);
-        $user->update($request->only([
+        $userData = $request->only([
             'email',
             'first_names',
             'last_names',
-            'avatar_image',
-        ]));
+        ]);
+        if ($request->has('password')) {
+            $userData['password'] = Hash::make($request->input('password'));
+        }
+        $user->update($userData);
+        // Handle file upload
+        if ($request->hasFile('avatar_image')) {
+            $avatarImage = $request->file('avatar_image');
+            $imageData = file_get_contents($avatarImage->getRealPath());
+            $user->avatar_image = base64_encode($imageData);
+            $user->save();
+        }
         $user->customer()->update(
             $request->only([
                 'phone',

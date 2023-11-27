@@ -94,7 +94,7 @@
             <div class="login-form">
                 <br>
                 <label for="email" style="color:#000;">Email</label>
-                <input id="email" type="email" value="admin4@example.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input id="email" type="email" value="{{ old('email', 'admin4@example.com') }}" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -102,7 +102,7 @@
                 @enderror
                 <br>
                 <label for="password" style="color:#000;">Password</label>
-                <input id="password" type="text" value="password4" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                <input id="password" type="text" value="{{ old('password', 'password4') }}" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                 @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

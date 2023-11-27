@@ -7,5 +7,5 @@
     @endif
     <p style="font-weight: bold; font-size: 18px;">{{ $supplier->name }}</p>
     <input type="hidden" name="phone" value="{{ $supplier->contact->phone }}">
-    <button type="button" class="requestSupplier"> Request</button>
+    <button type="button" class="requestSupplier" onclick="window.location.href = '{{ 'https://api.whatsapp.com/send?phone=528121997174' }}'"> Request</button>
 </div>

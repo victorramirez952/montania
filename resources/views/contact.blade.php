@@ -12,7 +12,7 @@
         <div class="row">
             <!-- Columna para el formulario de contacto -->
             <div class="col-md-6">
-                <form class="contact-form" method="POST" action="{{ route('msg-confirm') }}">
+                <form class="contact-form" method="POST" action="{{ route('send_email') }}">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>

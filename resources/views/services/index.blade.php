@@ -3,7 +3,7 @@
 @section('title', 'Servicios')
 
 @section('content')
-    <x-ModalService :service="$service ?? null"/>
+    {{-- <x-ModalService :service="$service ?? null"/> --}}
     <x-Navbar/>
     <!-- Header Servicios -->
     <header class="title-bg title">
@@ -11,9 +11,9 @@
     </header>
     <!-- Menu de Servicios -->
     <div class="servicesMenu w-100">
-        <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalService">
+        {{-- <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalService">
             <i class="fa-solid fa-plus text-white"></i> Add service
-        </button>
+        </button> --}}
         <div class="servicesView w-100">
             <div class="row w-100">
                 @foreach ($services as $service)

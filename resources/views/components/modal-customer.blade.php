@@ -12,7 +12,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="editCustomerForm" action="{{ route('customers.update', $user->id_user) }}" method="POST" class="needs-validation" novalidate>
+                <form id="editCustomerForm" action="{{ route('customers.update', $user->id_user) }}" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <label for="avatar_image">Avatar Image:</label>
-                        <input type="file" class="form-control-file" id="avatar_image" name="avatar_image">
+                        <input type="file" class="form-control-file" id="avatar_image" name="avatar_image" accept="image/*">
                         @error('avatar_image')
                             <div class="alert alert-danger text" role="alert" style="font-size: 12px">
                                 {{ $message }}

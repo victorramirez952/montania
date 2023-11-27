@@ -19,7 +19,8 @@ class ProjectController extends Controller
     // Mostrar un curso en particular
     public function show(Project $project){
         $reviews = $project->reviews()->get();
-        return view('projects.show', compact('project', 'reviews'));
+        $customers = $project->customers()->get();
+        return view('projects.show', compact('project', 'reviews', 'customers'));
     }
 
     public function store(ProjectRequest $request){
@@ -40,6 +41,6 @@ class ProjectController extends Controller
 
     public function destroy(Project $project){
         $project->delete();
-        return redirect()->route('projects.index');
+        return back()->with('success', 'Project deleted successfully!');
     }
 }

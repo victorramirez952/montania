@@ -122,9 +122,9 @@
     <!-- Sección "Principales Servicios" -->
     <div class="mainServices">
         <h1>Our main services</h1>
-        <div class="viewMainServices d-flex justify-content-around align-items-center align-items-stretch">
+        <div class="d-flex justify-content-around align-items-center align-items-stretch w-100 p-2">
             @foreach ($services as $service)
-                <div class="serviceSpace d-flex flex-column justify-content-between" style="height: inherit;">
+                <div class="serviceSpace d-flex flex-column justify-content-between mx-1" style="height: inherit;">
                     <p style="font-weight: bold; text-align: start; font-size: 16px;">{{ $service->name }}</p>
                     <p style="text-align: start; font-size: 22px;">
                         @if ($price = $service->prices->where('price_cover', true)->first())

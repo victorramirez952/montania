@@ -3,9 +3,9 @@
 @section('title', 'Servicios ' . $service->name)
 
 @section('content')
-    <x-ModalService :service="$service"/>
-    <x-ModalDeliverable :service="$service" :deliverable="$deliverable ?? null" :id="'modalDeliverable'"/>
-    <x-ModalEliminar/>
+    {{-- <x-ModalService :service="$service"/> --}}
+    {{-- <x-ModalDeliverable :service="$service" :deliverable="$deliverable ?? null" :id="'modalDeliverable'"/> --}}
+    {{-- <x-ModalEliminar/> --}}
     <x-Navbar/>
     <!-- Header Servicio "Design Coaching" -->
     <header class="title-bg title">
@@ -13,11 +13,11 @@
     </header>
 
     <!-- Sección "Detalles" -->
-    <div class="serviceDetails">
+    {{-- <div class="serviceDetails">
       <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalService">
         <i class="fa-solid fa-pen-to-square text-white"></i> Edit service
       </button>
-    </div>
+    </div> --}}
   <div class="serviceDetails">
     <div class="detailsContent">
       <div class="detail">
@@ -66,19 +66,19 @@
   <div class="servicesMenu">
     <!-- Sección "¿Qué incluye?" -->
     <h1 style="font-size: 36px; margin-bottom: 40px; margin-top: 10px;">What does it include?</h1>
-    <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mb-4" data-toggle="modal" data-target="#modalDeliverable">
+    {{-- <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mb-4" data-toggle="modal" data-target="#modalDeliverable">
       <i class="fa-solid fa-plus text-white"></i> Add deliverable
-    </button>
+    </button> --}}
     <table>
       <tr>
         @foreach ($service->deliverables as $deliverable)
           <td>
-            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mb-4" onclick="window.location.href = '{{ route('deliverables.show', ['service' => $service, 'deliverable' => $deliverable]) }}'">
+            {{-- <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mb-4" onclick="window.location.href = '{{ route('deliverables.show', ['service' => $service, 'deliverable' => $deliverable]) }}'">
               <i class="fa-solid fa-pen-to-square text-white"></i> Edit deliverable
             </button>
             <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mb-4" data-toggle="modal" data-target="#modalEliminar" onclick="setDeleteForm('{{ route('deliverables.destroy', $deliverable) }}')">
               <i class="fa-solid fa-trash text-white"></i> Delete deliverable
-            </button>
+            </button> --}}
             <p style="font-weight: bold;">{{ $deliverable->title }}</p>
             <ol class="lista">
                 <li>{{ $deliverable->description }}</li>
@@ -94,9 +94,9 @@
   <!-- Sección de "Reviews" -->
   <div class="someReviews">
     <h1 style="text-align: center; font-size: 36px;">Reviews</h1>
-    <div class="espServiceReviews">
+    <div class="espServiceReviews d-flex justify-content-center">
       @foreach ($service->reviews as $review)
-        <div class="reviewEspService">
+        <div class="reviewEspService w-auto text-center">
           <div>
             <img src="{{ asset('img/profileClient.png') }}">
             <div>

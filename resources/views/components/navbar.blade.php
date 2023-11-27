@@ -25,14 +25,16 @@
                 </li>
                 <li class="nav-item">
                     @if (Auth::user())
-                        @cannot('users.index')
-                            <a class="nav-link" href="{{ route('customers.resetDefaultProject', Auth::user()) }}" style="color: #EBE5D3">My
-                                profile</a>
-                        @endcannot
-                        @can('users.index')
+                        @if (Auth::user()->customer)
+                            @if(Auth::user()->type == 0)
+                                <a class="nav-link" href="{{ route('customers.resetDefaultProject', Auth::user()->customer) }}" style="color: #EBE5D3">My
+                                    profile</a>
+                            @endif
+                        @endif
+                        @if(Auth::user() && Auth::user()->type == 1)
                             <a class="nav-link" href="{{ route('customers.index', Auth::user()) }}"
                                 style="color: #EBE5D3">Customers</a>
-                        @endcan
+                        @endif
                     @else
                         <a class="nav-link" href="{{ route('login') }}" style="color: #EBE5D3">I'm Customer</a>
                     @endif
@@ -47,8 +49,17 @@
                             <ul class="navbar-nav ml-auto">
                                 <!-- Your other menu items -->
                                 <!-- ... -->
-                                <img src="{{ asset('img/profileClient.png') }}" class="bg-white img-fluid profile-image"
-                                    width="50">
+                                <div class="col-md-4">
+                                    @if (Auth::user() && Auth::user()->avatar_image)
+                                        <img src="data:image/png;base64,{{ base64_encode(Auth::user()->avatar_image) }}" class="bg-white img-fluid profile-image"
+                                            width="50" alt="Avatar">
+                                    @else
+                                        <img src="{{ asset('img/profileClient.png') }}" class="bg-white img-fluid profile-image"
+                                            width="50" alt="Default Avatar">
+                                    @endif
+                                </div>                                
+                                {{-- <img src="{{ asset('img/profileClient.png') }}" class="bg-white img-fluid profile-image"
+                                    width="50"> --}}
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
                                         role="button" data-toggle="dropdown" aria-haspopup="true"

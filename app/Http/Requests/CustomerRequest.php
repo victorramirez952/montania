@@ -27,7 +27,7 @@ class CustomerRequest extends FormRequest
             'email' => 'required|email|max:50',
             'first_names' => 'required|max:50',
             'last_names' => 'required|max:50',
-            'avatar_image' => 'nullable|image', // Assuming avatar is an image (adjust as needed)
+            'avatar_image' => 'nullable|file',
             'type' => 'nullable|integer',
             'password' => 'nullable|string|max:255',
 

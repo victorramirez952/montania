@@ -3,9 +3,9 @@
 @section('title', 'Proyecto portafolio ' . $project->name)
 
 @section('content')
-    <x-ModalProject :project="$project ?? null"/>
     {{-- <x-ModalReview :project="$project ?? null" :review="$review ?? null"/> --}}
-    <x-ModalEliminar/>
+    {{-- <x-ModalEliminar/> --}}
+    <x-ModalEditProject :customer="$customers->first() ?? null" :project="$project ?? null"/>
     <x-Navbar />
     <!-- Header Proyecto Especifico -->
     <header class="title-bg title">
@@ -13,14 +13,16 @@
     </header>
 
     <!-- Descripción Proyecto Especifico -->
-    <div class="container my-4">
-        <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalProject">
-            <i class="fa-solid fa-pen-to-square text-white"></i> Edit project
-        </button>
-        <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalEliminar" onclick="setDeleteForm('{{ route('projects.destroy', $project) }}')">
-            <i class="fa-solid fa-trash text-white"></i> Delete project
-        </button>
-    </div>
+    @if(Auth::user() && Auth::user()->type == 1)
+        <div class="container my-4">
+            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalEditProject">
+                <i class="fa-solid fa-pen-to-square text-white"></i> Edit project
+            </button>
+            {{-- <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal" data-target="#modalEliminar" onclick="setDeleteForm('{{ route('projects.destroy', $project) }}')">
+                <i class="fa-solid fa-trash text-white"></i> Delete project
+            </button> --}}
+        </div>
+    @endif
     <div class="aboutContent p-5">
         <div class="descProyectos d-flex flex-column flex-sm-row w-100 p-4">
             <div style="margin-right: 20px;" class="w-100 w-sm-25">

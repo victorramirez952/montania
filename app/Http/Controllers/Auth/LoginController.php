@@ -55,7 +55,7 @@ class LoginController extends Controller
                 return redirect('/');
             }
         } else{
-            return redirect()->route('login')->with('error', 'Input proper email/pasword');
+            return redirect()->route('login')->with('error', 'Input proper email/pasword')->withInput();
         }
     }
 }

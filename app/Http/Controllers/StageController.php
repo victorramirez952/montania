@@ -21,7 +21,7 @@ class StageController extends Controller
         $requestData['completed'] = $request->has('completed') ? $request->input('completed') : false;
         $stage = $project->stages()->create($requestData);
         $customer = Customer::find($id_user);
-        return redirect()->route('customers.show', $customer);
+        return back()->with('success', 'Stage created successfully!');
     }
 
     public function update(Request $request, $id_project){
@@ -42,11 +42,11 @@ class StageController extends Controller
         $customer = Customer::find($id_customer);
 
         // Redirect to the appropriate page (adjust this based on your application's logic)
-        return redirect()->route('customers.show', $customer);
+        return back()->with('success', 'Stage updated successfully!');
     }
 
     public function destroy(Stage $stage, Customer $customer){
         $stage->delete();
-        return redirect()->route('customers.show', $customer);
+        return back()->with('success', 'Stage deleted successfully!');
     }
 }

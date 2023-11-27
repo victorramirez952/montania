@@ -4,10 +4,17 @@
 @section('body-style', 'background-color: #EBE5D3;')
 
 @section('content')
-    <x-ModalProject :customer="$customer ?? null" :project="$defaultProject ?? null" />
+    {{-- <x-ModalProject :customer="$customer ?? null" :project="$defaultProject ?? null" /> --}}
+    <x-ModalCreateProject :customer="$customer ?? null" />
     <x-ModalProjectsUser :customer="$customer ?? null" :projects="$projects" :defaultProject="$defaultProject ?? null" />
-    <x-ModalCustomer :user="$customer->user ?? null" />
+    @if(Auth::user() && Auth::user()->type == 1)
+        <x-ModalAdminEditCustomer :user="$customer->user ?? null" />
+    @endif
+    @if(Auth::user()->type == 0)
+        <x-ModalCustomer :user="$customer->user ?? null" />
+    @endif
     @if (!empty($defaultProject))
+        <x-ModalEditProject :customer="$customer ?? null" :project="$defaultProject ?? null"/>
         <x-ModalCreateStage :user="$customer->user ?? null" :defaultProject="$defaultProject ?? null" />
         <x-ModalEditStage :user="$customer->user ?? null" :defaultProject="$defaultProject ?? null" />
         <x-ModalReview :customer="$customer ?? null" :project="$defaultProject ?? null" :review="$review ?? null"/>
@@ -16,7 +23,7 @@
     <x-ModalEliminar />
     <x-Navbar />
     <!-- Contenido de la pag -->
-    <div class="container" style="margin: auto; margin-top: 150px; margin-bottom: 110px;">
+    <div class="container" style="margin: auto; margin-top: 125px; margin-bottom: 110px;">
         <div class="container my-4">
             <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal"
                 data-target="#modalUser">
@@ -26,11 +33,15 @@
         <div class="row">
             <!-- Columna para la imagen -->
             <div class="col-md-4">
-                <img src="{{ asset('img/perfil.png') }}" alt="Foto de Perfil" class="img-fluid">
-            </div>
+                @if ($customer->user && $customer->user->avatar_image)
+                    <img src="data:image/png;base64,{{ base64_encode($customer->user->avatar_image) }}" alt="Avatar" class="img-fluid">
+                @else
+                    <img src="{{ asset('img/perfil.png') }}" alt="Foto de Perfil" class="img-fluid">
+                @endif
+            </div>            
             <!-- Columna para el texto -->
             <div class="col-md-8" style="font-size: 20px;">
-                <p><strong>Nombre:</strong> {{ $customer->user->first_names }}</p>
+                <p><strong>Nombre:</strong> {{ $customer->user->first_names }} {{ $customer->user->last_names }}</p>
                 <p><strong>Email:</strong> {{ $customer->user->email }}</p>
                 <p><strong>Teléfono:</strong> {{ $customer->phone }}</p>
                 <p><strong>Dirección:</strong> {{ $customer->address }}</p>
@@ -42,27 +53,32 @@
     </div>
     <div style="background-color: white; padding: 10px; color: white;"></div>
 
-    <h4 class="w-100 py-2 text-center">Dashboard</h4>
+    <h4 class="w-100 py-2 text-center my-5">Dashboard</h4>
     {{-- @if ($defaultProject)
         <h4>Hay defaultProject: {{ $defaultProject->name }}</h4>
     @endif --}}
 
     @if (!empty($defaultProject))
-        <div class="container d-flex align-items-center p-2">
+        <div class="container d-flex align-items-center p-2 my-4">
             <p class="text-center p-0 m-0 h-100">{{ $defaultProject->name }}</p>
             <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect mx-4" data-toggle="modal"
                 data-target="#modalProjectUser">
                 <i class="fa-solid fa-ellipsis"></i>
             </button>
-            <button type="button"
-            class="btn btn-primary pmd-btn-icon pmd-ripple-effect d-flex justify-content-center align-items-center"
-            data-toggle="modal" data-target="#modalProject" onclick="setCreateProjectForm('{{ route('projects.store') }}')">
-            <i class="fa-solid fa-plus text-white h6"></i>Add Project
-            </button>
-            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect ml-1" data-toggle="modal"
-                data-target="#modalProject" onclick="setEditProjectForm('{{ route('projects.update', ['project' => $defaultProject]) }}')">
-                <i class="fa-solid fa-pen-to-square text-white"></i> Edit project
-            </button>
+            @if(Auth::user() && Auth::user()->type == 1)
+                <button type="button"
+                class="btn btn-primary pmd-btn-icon pmd-ripple-effect"
+                data-toggle="modal" data-target="#modalCreateProject">
+                <i class="fa-solid fa-plus text-white"></i>Add Project
+                </button>
+                <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect ml-1" data-toggle="modal"
+                    data-target="#modalEditProject">
+                    <i class="fa-solid fa-pen-to-square text-white"></i> Edit project
+                </button>
+                <button type="button" class="btn btn-danger pmd-btn-icon pmd-ripple-effect ml-1" data-toggle="modal" data-target="#modalEliminar" onclick="setDeleteForm('{{ route('projects.destroy', $defaultProject) }}')">
+                    <i class="fa-solid fa-trash text-white"></i> Delete project
+                </button>
+            @endif
         </div>
 
         <div class="container d-flex justify-content-between p-0">
@@ -121,14 +137,16 @@
             </div>
         </div>
 
-        <div style="background-color: white; padding: 10px; color: white;">h</div>
+        <div style="background-color: white; padding: 10px; color: white;" class="my-5">h</div>
 
-        <div class="container d-flex flex-column align-items-center justify-content-center mb-5">
+        <div class="container d-flex flex-column align-items-center justify-content-center my-5">
             <h2>Montania's process</h2>
-            <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal"
-                data-target="#modalStage">
-                <i class="fa-solid fa-plus text-white"></i> Add stage
-            </button>
+            @if(Auth::user() && Auth::user()->type == 1)
+                <button type="button" class="btn btn-primary pmd-btn-icon pmd-ripple-effect" data-toggle="modal"
+                    data-target="#modalStage">
+                    <i class="fa-solid fa-plus text-white"></i> Add stage
+                </button>
+            @endif
         </div>
         <div class="container">
             <div class="d-flex mb-2 w-50 mx-auto">
@@ -161,21 +179,23 @@
                     <div class="col-6">
                         <h5>{{ $stage->description }}</h5>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <button type="button"
-                            class="btn btn-primary pmd-btn-icon pmd-ripple-effect d-flex justify-content-center align-items-center"
-                            data-toggle="modal" data-target="#modalEditStage" data-id-stage="{{ $stage->id_stage }}"
-                            data-date="{{ $stage->date }}" data-completed="{{ $stage->completed }}"
-                            data-description="{{ $stage->description }}" onclick="populateEditModal(this)">
-                            <i class="fa-solid fa-pen-to-square text-white h6"></i>
-                        </button>
-                        <button type="button"
-                            class="btn btn-primary pmd-btn-icon pmd-ripple-effect ml-4 d-flex justify-content-center align-items-center"
-                            data-toggle="modal" data-target="#modalEliminar"
-                            onclick="setDeleteForm('{{ route('stages.destroy', ['stage' => $stage, 'customer' => $customer]) }}')">
-                            <i class="fa-solid fa-trash text-white h6"></i>
-                        </button>
-                    </div>
+                    @if(Auth::user() && Auth::user()->type == 1)
+                        <div class="d-flex align-items-center">
+                            <button type="button"
+                                class="btn btn-primary pmd-btn-icon pmd-ripple-effect d-flex justify-content-center align-items-center"
+                                data-toggle="modal" data-target="#modalEditStage" data-id-stage="{{ $stage->id_stage }}"
+                                data-date="{{ $stage->date }}" data-completed="{{ $stage->completed }}"
+                                data-description="{{ $stage->description }}" onclick="populateEditModal(this)">
+                                <i class="fa-solid fa-pen-to-square text-white h6"></i>
+                            </button>
+                            <button type="button"
+                                class="btn btn-primary pmd-btn-icon pmd-ripple-effect ml-4 d-flex justify-content-center align-items-center"
+                                data-toggle="modal" data-target="#modalEliminar"
+                                onclick="setDeleteForm('{{ route('stages.destroy', ['stage' => $stage, 'customer' => $customer]) }}')">
+                                <i class="fa-solid fa-trash text-white h6"></i>
+                            </button>
+                        </div>
+                    @endif
                 </div>
             @endforeach
             <div class="d-flex mb-2 w-50 mx-auto">
@@ -191,7 +211,7 @@
             </div>
         </div>
 
-        <div style="background-color: white; padding: 10px; color: white;">h</div>
+        <div style="background-color: white; padding: 10px; color: white;" class="my-5">h</div>
 
         <!-- Sección Reviews -->
         <div class="someReviews d-flex flex-column">
@@ -207,7 +227,12 @@
                 @foreach ($defaultProject->reviews as $review)
                     <div class="reviewEspService">
                         <div>
-                            <img src="{{ asset('img/profileClient.png') }}">
+                            @if ($review->customer->user && $review->customer->user->avatar_image)
+                                <img src="data:image/png;base64,{{ base64_encode($review->customer->user->avatar_image) }}" class="bg-white img-fluid profile-image"
+                                width="50" alt="Avatar">
+                            @else
+                                <img src="{{ asset('img/profileClient.png') }}" alt="Default Avatar">
+                            @endif
                             <div>
                                 <p style="margin-bottom: 0.5px;">{{ $review->customer->user->first_names }} {{ $review->customer->user->last_names }}</p>
                                 <p>Cliente Montania</p>
@@ -235,11 +260,13 @@
     @else
     <div class="container d-flex flex-column align-items-center my-4 justify-content-center">
         <h5 class="text-center">Without projects</h5>
-        {{-- <button type="button"
-            class="btn btn-primary pmd-btn-icon pmd-ripple-effect d-flex justify-content-center align-items-center"
-            data-toggle="modal" data-target="#modalProject">
-            <i class="fa-solid fa-plus text-white h6"></i>Add Project
-        </button> --}}
+        @if(Auth::user() && Auth::user()->type == 1)
+            <button type="button"
+                class="btn btn-primary pmd-btn-icon pmd-ripple-effect d-flex justify-content-center align-items-center"
+                data-toggle="modal" data-target="#modalCreateProject">
+                <i class="fa-solid fa-plus text-white h6"></i>Add Project
+            </button>
+        @endif
     </div>
     @endif
     
@@ -290,18 +317,6 @@
     </script>
 
 <script>
-    function setCreateProjectForm(action) {
-        // Set the action attribute and id value for the delete form
-        document.getElementById('modalProject').action = action;
-        document.getElementById('modalProjectLabel').innerHTML = "Add Project"
-        // var modal = document.getElementById('modalProject');
-        //     modal.querySelector('#name').value = '';
-        //     modal.querySelector('#place').value = '';
-        //     modal.querySelector('#start_date').value = '',
-        //     modal.querySelector('#end_date').value = '',
-        //     modal.querySelector('#type').value = 'Residencial';
-        //     modal.querySelector('#description').value = 'Lorem ipsum';
-    }
     function setEditProjectForm(action) {
         // Set the action attribute and id value for the delete form
         document.getElementById('modalProject').action = action;
